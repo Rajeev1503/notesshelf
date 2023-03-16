@@ -93,7 +93,7 @@ export default function TopMenu(props) {
               onClick={() => {
                 navigator.clipboard.writeText(
                   process.env.NODE_ENV == "production"
-                    ? `${process.env.PRODUCTION_URL}/${subjectId}/${
+                    ? `notesshelf.vercel.app/${subjectId}/${
                         postId ? postId : ""
                       }`
                     : `http://localhost:3000/${subjectId}/${

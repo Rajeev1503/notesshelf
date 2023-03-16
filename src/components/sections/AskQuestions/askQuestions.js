@@ -3,7 +3,7 @@ export default function AskQuestions(props) {
   return (
     <div
       className="flex flex-col items-center gap-2 absolute border border-[#1a1a2e] bg-[#1a1a2e] right-2 top-[50px] rounded-lg w-[96%] md:w-[60%] p-0 md:p-4"
-      style={{ height: "80.5vh" }}
+      style={{ height: "90.5vh" }}
     >
       <div className="h-[92%] w-full rounded-lg md:p-4 p-1 overflow-y-scroll scrollbarfeature">
         <div className="flex flex-col gap-2 ">
