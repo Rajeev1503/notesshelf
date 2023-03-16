@@ -12,9 +12,11 @@ import {
 } from "graphql/queries";
 import { graphcms } from "graphql/graphCmsClient";
 import MobileMenu from "@/components/sections/mobile-menu";
+import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
 
 export default function Subject({ posts, subject, semesters }) {
   const [toggleMobileQuickMenu, setToggleMobileQuickMenu] = useState(true);
+  const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
 
   return (
     <>
@@ -30,6 +32,7 @@ export default function Subject({ posts, subject, semesters }) {
         <div className="p-2 border-b border-[#1a1a2e]">
           <TopMenu
             enableShareButton={true}
+            askQuestionDisplay={()=>setAskQuestionDisplay(!askQuestionDisplay)}
           />
         </div>
         <div
@@ -62,8 +65,13 @@ export default function Subject({ posts, subject, semesters }) {
           toggleMobileQuickMenu={() =>
             setToggleMobileQuickMenu(!toggleMobileQuickMenu)
           }
+          enableAskQuestionButton={true}
+          askQuestionDisplay={()=>setAskQuestionDisplay(!askQuestionDisplay)}
           enableRelatedMenu={false}
         />
+        <div className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}>
+        <AskQuestions />
+      </div>
       </div>
     </>
   );

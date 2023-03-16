@@ -18,20 +18,24 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
+import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
 
 const components = {
   wrapper: (props) => (
-    <div
-      className="text-[1.125rem] text-gray-200 md:text-justify text-left"
-    >
+    <div className="text-[1.125rem] text-gray-200 md:text-justify text-left">
       <main>{props.children}</main>
     </div>
   ),
   p: (props) => (
-    <p className="pb-8 text-[#c6c6c6]" style={{
-      lineHeight: "1.77777778",
-      fontSize: "1.125rem"
-    }}>{props.children}</p>
+    <p
+      className="pb-8 text-[#c6c6c6]"
+      style={{
+        lineHeight: "1.77777778",
+        fontSize: "1.125rem",
+      }}
+    >
+      {props.children}
+    </p>
   ),
 
   h3: (props) => (
@@ -58,6 +62,7 @@ const components = {
 export default function Post({ postContent, mdxContent, semesters, allPosts }) {
   const [toggleMobileQuickMenu, setToggleMobileQuickMenu] = useState(true);
   const [toggleMobileRelatedMenu, setToggleMobileRelatedMenu] = useState(true);
+  const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
 
   return (
     <>
@@ -71,7 +76,12 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
         style={{ height: "100vh" }}
       >
         <div className="p-2 border-b border-[#1a1a2e]">
-          <TopMenu enableShareButton={true} />
+          <TopMenu
+            enableShareButton={true}
+            askQuestionDisplay={() =>
+              setAskQuestionDisplay(!askQuestionDisplay)
+            }
+          />
         </div>
         <div
           className="flex flex-row justify-between w-full h-full"
@@ -147,8 +157,15 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
             setToggleMobileRelatedMenu(!toggleMobileRelatedMenu);
             setToggleMobileQuickMenu(true);
           }}
+          askQuestionDisplay={() => setAskQuestionDisplay(!askQuestionDisplay)}
           enableRelatedMenu={true}
+          enableAskQuestionButton={true}
         />
+        <div
+          className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}
+        >
+          <AskQuestions />
+        </div>
       </div>
     </>
   );

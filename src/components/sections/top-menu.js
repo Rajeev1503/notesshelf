@@ -31,8 +31,6 @@ export default function TopMenu(props) {
     return subjectNameArr.join(" ");
   }
 
-  const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
-
   const { subjectId, postId } = useRouter().query;
 
   return (
@@ -72,8 +70,8 @@ export default function TopMenu(props) {
         {props.enableShareButton ? (
           <div className="w-full flex justify-end gap-2 items-center ">
             <div
-              className="w-full"
-              onClick={() => setAskQuestionDisplay(!askQuestionDisplay)}
+              className="w-full hidden md:inline"
+              onClick={props.askQuestionDisplay}
             >
               <button className="w-full border min-w-max border-white text-white py-1 px-2 rounded-lg cursor-pointer text-xs">
                 Ask Questions
@@ -111,10 +109,6 @@ export default function TopMenu(props) {
         ) : (
           <></>
         )}
-      </div>
-
-      <div className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}>
-        <AskQuestions />
       </div>
     </div>
   );

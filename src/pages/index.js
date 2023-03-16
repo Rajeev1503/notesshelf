@@ -23,7 +23,7 @@ export default function Home({ posts, semesters }) {
         style={{ height: "100vh" }}
       >
         <div className="p-2 border-b border-[#1a1a2e]">
-          <TopMenu enableShareButton={false} />
+          <TopMenu enableShareButton={false}/>
         </div>
         <div
           className="flex sm:flex-row flex-col w-full h-full md:pb-0"
@@ -60,6 +60,7 @@ export default function Home({ posts, semesters }) {
           toggleMobileQuickMenu={() =>
             setToggleMobileQuickMenu(!toggleMobileQuickMenu)
           }
+          enableAskQuestionButton={false}
           enableRelatedMenu={false}
         />
       </div>
