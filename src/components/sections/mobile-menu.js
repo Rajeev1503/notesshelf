@@ -1,10 +1,6 @@
 import Link from "next/link";
-import { useState } from "react";
-import { TbHome } from "react-icons/tb";
-import AskQuestions from "./AskQuestions/askQuestions";
+import { FaHome } from "react-icons/fa";
 export default function MobileMenu(props) {
-
-  const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
 
   return (
     <div className="sm:hidden fixed text-sm bottom-0 w-full mt-2">
@@ -13,7 +9,7 @@ export default function MobileMenu(props) {
           href="/"
           className="w-[40px] flex justify-center items-center text-center font-semibold p-2 text-white border-r border-gray-600"
         >
-          <TbHome />
+          <FaHome />
         </Link>
 
         <div className="w-full flex flex-row justify-between items-center pr-4">
@@ -33,8 +29,6 @@ export default function MobileMenu(props) {
               </div>
             </div>:<></>}
 
-
-
           <Link
             href="/"
             className={` ${
@@ -45,7 +39,7 @@ export default function MobileMenu(props) {
           >
             <div></div>
           </Link>
-          {/* <Link className=" font-bold text-center" href="/"></Link> */}
+          
           <div
             className={`${
               props.enableRelatedMenu ? "" : "hidden"

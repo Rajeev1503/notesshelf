@@ -32,7 +32,10 @@ export default function Subject({ posts, subject, semesters }) {
         <div className="p-2 border-b border-[#1a1a2e]">
           <TopMenu
             enableShareButton={true}
-            askQuestionDisplay={()=>setAskQuestionDisplay(!askQuestionDisplay)}
+            enableAskQuestionButton={true}
+            askQuestionDisplay={() =>
+              setAskQuestionDisplay(!askQuestionDisplay)
+            }
           />
         </div>
         <div
@@ -66,12 +69,16 @@ export default function Subject({ posts, subject, semesters }) {
             setToggleMobileQuickMenu(!toggleMobileQuickMenu)
           }
           enableAskQuestionButton={true}
-          askQuestionDisplay={()=>setAskQuestionDisplay(!askQuestionDisplay)}
+          askQuestionDisplay={() => setAskQuestionDisplay(!askQuestionDisplay)}
           enableRelatedMenu={false}
         />
-        <div className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}>
-        <AskQuestions />
-      </div>
+        <div
+          className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}
+        >
+          <AskQuestions
+            askQuestionDisplay={() => setAskQuestionDisplay(false)}
+          />
+        </div>
       </div>
     </>
   );

@@ -67,7 +67,7 @@ export default function TopMenu(props) {
       </div>
 
       <div className="w-[24%] py-1">
-        {props.enableShareButton ? (
+        {props.enableAskQuestionButton ? (
           <div className="w-full flex justify-end gap-2 items-center ">
             <div
               className="w-full hidden md:inline"

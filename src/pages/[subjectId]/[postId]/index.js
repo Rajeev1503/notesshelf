@@ -78,6 +78,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
         <div className="p-2 border-b border-[#1a1a2e]">
           <TopMenu
             enableShareButton={true}
+            enableAskQuestionButton={true}
             askQuestionDisplay={() =>
               setAskQuestionDisplay(!askQuestionDisplay)
             }
@@ -107,7 +108,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
           </div>
           <div className="sm:w-[64%] w-full font-normal scrollbarfeature h-full overflow-y-scroll">
             <div className="mt-2 sm:w-[90%] w-[98%] m-auto h-full p-2 rounded-lg">
-              <div className="px-2 md:px-10 w-full pb-24">
+              <div className="px-2 lg:px-10 w-full pb-24">
                 <div className="flex flex-col gap-10 ">
                   <div className=" border-b-2 border-gray-800 border-opacity-50 py-10">
                     {/* {postContent?.coverImage?.url?<Image src={postContent.coverImage.url} width={2250} height={1390}/>:<></>} */}
@@ -116,9 +117,9 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
                     </h1>
                   </div>
                   <div className="md:px-8 px-0">
-                    <MDXRemote {...mdxContent} components={components} />
-                  </div>
-                </div>
+                    <MDXRemote {...mdxContent} components={components} /> 
+                  </div> 
+                </div> 
                 <div className="mb-8 justify-center hidden">
                   <div className="max-w-min border border-[#13131e] bg-[#13131e] bg-opacity-30 rounded-full flex flex-row items-center gap-8 font-semibold text-xl px-8 p-2">
                     <div className="bg-[#13131e] px-4 py-2 rounded-2xl hover:scale-105 text-gray-300 hover:text-white cursor-pointer">
@@ -164,7 +165,9 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
         <div
           className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}
         >
-          <AskQuestions />
+          <AskQuestions askQuestionDisplay={() =>
+              setAskQuestionDisplay(false)
+            }/>
         </div>
       </div>
     </>
