@@ -3,7 +3,7 @@ import { FaHome } from "react-icons/fa";
 export default function MobileMenu(props) {
 
   return (
-    <div className="sm:hidden fixed text-sm bottom-0 w-full mt-2">
+    <div className="sm:hidden fixed text-sm bottom-0 w-full mt-2 z-50">
       <div className="flex flex-row items-center justify-start gap-4 py-2 border-t border-gray-700 bg-[#13131e] bg-opacity-80 backdrop-blur text-white">
         <Link
           href="/"
