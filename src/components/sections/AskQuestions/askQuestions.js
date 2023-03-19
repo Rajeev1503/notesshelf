@@ -104,14 +104,14 @@ export default function AskQuestions(props) {
         maximiseWindow ? "md:w-[99%]" : "md:w-[60%]"
       }`}
     >
-      <div className="flex justify-between w-full px-2">
+      <div className="flex justify-between w-full px-2 py-1 border-b border-gray-800">
         <div className="min-w-max flex items-center">
-          <div className="italic flex items-center text-gray-500 font-semibold text-xs cursor-pointer py-1" onClick={()=>SetOpenInfoWindow(!openInfoWindow)}>
+          <div className="italic flex items-center text-gray-500 font-semibold text-xs cursor-pointer" onClick={()=>SetOpenInfoWindow(!openInfoWindow)}>
           <MdInfo className="cursor-pointer text-gray-600"/>
             Tips
           </div>
-          <div className={`${openInfoWindow?'': 'hidden'} absolute top-8 bg-gray-900 rounded-lg px-4 py-4 w-[60%]`}>
-              <button className="relative bottom-4 left-full text-gray-500 font-semibold" onClick={()=>SetOpenInfoWindow(false)}>x</button>
+          <div className={`${openInfoWindow?'': 'hidden'} absolute top-9 bg-gray-background rounded-lg py-4 px-8`}>
+              <button className="relative bottom-3 left-full text-gray-500 font-semibold" onClick={()=>SetOpenInfoWindow(false)}>x</button>
               <ul className="list-disc ml-2 italic text-gray-500 font-semibold text-xs">
                 <li>
                   You can add word limit to answers response
@@ -135,7 +135,7 @@ export default function AskQuestions(props) {
               </ul>
           </div>
         </div>
-        <div className="px-4 border-b border-gray-800 w-full p-1 hidden md:flex flex-row justify-end gap-2 text-gray-600">
+        <div className="px-4 w-full p-1 hidden md:flex flex-row justify-end gap-2 text-gray-600">
           {!maximiseWindow ? (
             <MdMaximize onClick={() => setMaximiseWindow(true)} className="cursor-pointer"/>
           ) : (

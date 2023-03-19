@@ -46,7 +46,7 @@ export default function Layout({
         >
           <div
             className={`bg-app-background scrollbarfeature border-r border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
-              !toggleMobileQuickMenu ? "absolute z-40" : "hidden"
+              !toggleMobileQuickMenu ? "absolute z-40 md:z-0" : "hidden"
             } `}
           >
             <div className="flex w-full">
@@ -68,7 +68,7 @@ export default function Layout({
           </div>
           {relatedPost ? (
             <div
-              className={`z-40 bg-app-background scrollbarfeature border-l border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
+              className={`z-40 md:z-0 bg-app-background scrollbarfeature border-l border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
                 !toggleMobileRelatedMenu
                   ? "absolute right-0 w-[90%] px-8 z-2"
                   : "hidden"
