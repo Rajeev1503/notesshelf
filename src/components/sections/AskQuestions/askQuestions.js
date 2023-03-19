@@ -5,7 +5,7 @@ import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { MdClose, MdMinimize, MdMaximize, MdInfo } from "react-icons/md";
 import rehypeHighlightCodeBlock from "@mapbox/rehype-highlight-code-block";
-import {MDXComponents} from "@/components/mdxComponents";
+import {MDXComponents} from "../../mdxComponents";
 
 let history = [];
 export default function AskQuestions(props) {
