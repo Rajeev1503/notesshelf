@@ -101,7 +101,7 @@ export default function AskQuestions(props) {
             <ul className="list-disc ml-2 italic text-gray-500 font-semibold text-xs">
               <li>You can add word limit to answers response</li>
               <li>Get answers relevant to topic you mention</li>
-              <li>You can add word limit to answers response</li>
+              <li>You can add word limit to answer's response</li>
               <li>Get answers relevant to topic you mention</li>
               <li>You can add word limit to answers response</li>
               <li>Get answers relevant to topic you mention</li>
