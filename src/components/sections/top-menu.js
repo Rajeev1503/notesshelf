@@ -23,14 +23,6 @@ export default function TopMenu(props) {
     );
   }
 
-  function subjectNameShortner(subjectName) {
-    let subjectNameArr = subjectName.split("-");
-    if (subjectNameArr.length > 4) {
-      subjectNameArr.splice(4, subjectNameArr.length - 4, "...");
-    }
-    return subjectNameArr.join(" ");
-  }
-
   const { subjectId, postId } = useRouter().query;
 
   return (
@@ -41,7 +33,7 @@ export default function TopMenu(props) {
           href="/"
         >
           <Image src={logo} alt="logo" height={20} width={20} />
-          <span className="md:inline text-xs md:text-normal text-[#896bff] text-opacity-70 ">
+          <span className="md:inline text-xs md:text-normal text-accent-color text-opacity-70 ">
             NotesShelf
           </span>
         </Link>
@@ -54,9 +46,6 @@ export default function TopMenu(props) {
       >
         {props?.enableShareButton ? (
           <div>
-            <Link href={`/${subjectId}`} className="sm:hidden">
-              {subjectNameShortner(subjectId)}
-            </Link>
             <Link href={`/${subjectId}`} className="hidden sm:block">
               {subjectId.split("-").join(" ")}
             </Link>
@@ -73,7 +62,7 @@ export default function TopMenu(props) {
               className="w-full hidden md:inline"
               onClick={props.askQuestionDisplay}
             >
-              <button className="w-full border min-w-max border-white text-white py-1 px-2 rounded-lg cursor-pointer text-xs">
+              <button className="w-full border min-w-max border-white text-lighttext py-1 px-2 rounded-lg cursor-pointer text-xs">
                 Ask Questions
               </button>
             </div>
@@ -101,7 +90,7 @@ export default function TopMenu(props) {
                 setClipBoardVariable(true);
               }}
             >
-              <div className="border border-[#896bff] text-[#896bff] min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs">
+              <div className="border border-accent-color text-accent-color min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs">
                 {clipBoardCopiedHandler()}
               </div>
             </div>

@@ -7,8 +7,8 @@ export default function Hero() {
   return (
     <>
       <div className={`${hideHero ? "hidden" : ""}`}>
-        <div className="border-b border-[#132133] lg:px-6 flex flex-col capitalize">
-          <div className="flex lg:flex-row-reverse flex-col justify-end md:items-center gap-4 rounded-lg text-[#f1f1f1] p-4">
+        <div className="border-b border-border-dark lg:px-6 flex flex-col capitalize">
+          <div className="flex lg:flex-row-reverse flex-col justify-end md:items-center gap-4 rounded-lg text-lighttext p-4">
             <div className="w-1/2 lg:flex flex-col gap-2 font-extrabold hidden">
               <div className=" rounded-lg p-2">
                 <Image src={heroimage} alt="hero image" />

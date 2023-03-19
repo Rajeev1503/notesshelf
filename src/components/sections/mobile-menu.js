@@ -4,10 +4,10 @@ export default function MobileMenu(props) {
 
   return (
     <div className="sm:hidden fixed text-sm bottom-0 w-full mt-2 z-50">
-      <div className="flex flex-row items-center justify-start gap-4 py-2 border-t border-gray-700 bg-[#13131e] bg-opacity-80 backdrop-blur text-white">
+      <div className="flex flex-row items-center justify-start gap-4 py-2 border-t border-gray-700 bg-app-background bg-opacity-80 backdrop-blur text-white">
         <Link
           href="/"
-          className="w-[40px] flex justify-center items-center text-center font-semibold p-2 text-white border-r border-gray-600"
+          className="w-[40px] flex justify-center items-center text-center font-semibold p-2 text-lighttext border-r border-gray-600"
         >
           <FaHome />
         </Link>

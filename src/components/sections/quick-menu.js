@@ -23,13 +23,13 @@ export default function QuickMenu(props) {
   return (
     <div className="flex flex-col gap-6 pb-24 sm:pb-0">
       <div>
-        <p className="text-xs font-bold text-[#555] py-2">IPU CSE Subjects</p>
+        <p className="text-xs font-bold text-gray-text py-2">IPU CSE Subjects</p>
         <div className="flex flex-col justify-between text-xs font-semibold rounded-lg py-1 capitalize">
           {props.semesters.map((e) => {
             return (
               <div key={e.id}>
                 <div
-                  className="flex justify-between items-center bg-[#1a1a2e] rounded-lg px-2 py-2 mb-2 cursor-pointer"
+                  className="flex justify-between items-center bg-card-dark rounded-lg px-2 py-2 mb-2 cursor-pointer"
                   onClick={() => {
                     if (toggleSubjects) {
                       dispatch({
@@ -82,14 +82,13 @@ export default function QuickMenu(props) {
                       >
                         <div className="text-sm sm:text-xs mt-2 font-semibold pl-2">
                           <div
-                            className={`w-full border border-[#1a1a2e] rounded-lg cursor-pointer px-2 py-2 ${
+                            className={`w-full border border-border-dark rounded-lg cursor-pointer px-2 py-2 ${
                               subjectId == z.slug
-                                ? "border-r-[#896bff] text-[#896bff] scale-110"
-                                : "border-r-[#1a1a2e] text-[#bbb] hover:text-[#fff] hover:scale-105"
+                                ? "border-r-accent-color text-accent-color scale-110"
+                                : "border-r-border-dark text-[#bbb] hover:text-[#fff] hover:scale-105"
                             }`}
                           >
                             <span>{z.subjectName}</span>
-                            {/* <span className="w-[30%] text-[#666]"></span> */}
                           </div>
                         </div>
                       </Link>

@@ -37,7 +37,7 @@ export default function Cards(props) {
             return (
               <div
                 key={e.id}
-                className="h-full p-4 rounded-lg grid grid-rows-1 gap-2 border-2 border-[#1a1a2e] bg-opacity-80 backdrop-filter bg-[#1a1a2e]"
+                className="h-full p-4 rounded-lg grid grid-rows-1 gap-2 border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-50 backdrop-filter bg-card-dark"
               >
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
                   <div className="pb-2">
@@ -69,12 +69,11 @@ export default function Cards(props) {
                     )}
                   </div>
 
-                  {/* <div className="text-xs font-semibold">26 feb, 2023</div> */}
                   <div className=" h-min flex flex-col gap-2 rounded-lg overflow-hidden font-semibold">
                     <div className="h-min text-[1.25rem]">
                       <p>{e.title}</p>
                     </div>
-                    <div className="text-gray-400 text-[1rem]">
+                    <div className="text-gray-text text-[1rem]">
                       {e?.excerpt ? (
                         <p>{excerptShortner(e.excerpt)}</p>
                       ) : (
@@ -84,8 +83,8 @@ export default function Cards(props) {
                     <br />
                   </div>
                 </Link>
-                <div className="pb-2 flex flex-wrap justify-between items-center gap-2 text-center text-xs font-semibold text-white rounded-lg">
-                  <div className="hidden flex-grow w-max bg-gray-700 py-1 px-2 rounded-lg">
+                <div className="pb-2 flex flex-wrap justify-between items-center gap-2 text-center text-xs font-semibold text-lighttext rounded-lg">
+                  <div className="hidden flex-grow w-max bg-gray-background py-1 px-2 rounded-lg">
                     {e.category.map((category) => {
                       return (
                         <span key={e.id}>{category.split("_").join(" ")}</span>
@@ -93,7 +92,7 @@ export default function Cards(props) {
                     })}
                   </div>
                   <div
-                    className="flex-grow w-max bg-gray-700 bg-opacity-50 py-2 px-2 rounded-lg cursor-pointer"
+                    className="flex-grow w-max bg-gray-background bg-opacity-30 py-2 px-2 rounded-lg cursor-pointer"
                     onClick={() => {
                       navigator.clipboard.writeText(
                         process.env.NODE_ENV == "production"

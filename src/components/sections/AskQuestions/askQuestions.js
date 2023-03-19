@@ -100,13 +100,13 @@ export default function AskQuestions(props) {
 
   return (
     <div
-      className={`h-[85vh] md:h-[90vh] shadow-2xl flex flex-col items-center absolute border border-[#1a1a2e] bg-[#1a1a2e] right-1 md:right-2 top-[60px] rounded-lg w-[98%] ${
+      className={`z-0 h-[85vh] md:h-[90vh] shadow-2xl flex flex-col items-center absolute border border-card-dark bg-card-dark right-1 md:right-2 top-[60px] rounded-lg w-[98%] ${
         maximiseWindow ? "md:w-[99%]" : "md:w-[60%]"
       }`}
     >
       <div className="flex justify-between w-full px-2">
         <div className="min-w-max flex items-center">
-          <div className="italic flex items-center text-gray-500 font-semibold text-xs cursor-pointer" onClick={()=>SetOpenInfoWindow(!openInfoWindow)}>
+          <div className="italic flex items-center text-gray-500 font-semibold text-xs cursor-pointer py-1" onClick={()=>SetOpenInfoWindow(!openInfoWindow)}>
           <MdInfo className="cursor-pointer text-gray-600"/>
             Tips
           </div>

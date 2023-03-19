@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function Related(props) {
+export default function OnGoingExams(props) {
   return (
-    <div className="w-full bg-opacity-50 backdrop-filter bg-[#1a1a2e] border-2 border-[#1a1a2e] rounded-full px-2 sm:px-4">
+    <div className="w-full border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-50 backdrop-filter bg-card-dark rounded-full px-2 sm:px-4">
       <div className="w-full hideScrollBar overflow-x-scroll flex flex-row items-center justify-start gap-1 font-semibold text-xs md:text-sm">
         <div className="min-w-max flex flex-row items-center justify-start text-center rounded-lg py-2">
         Ongoing Exams
