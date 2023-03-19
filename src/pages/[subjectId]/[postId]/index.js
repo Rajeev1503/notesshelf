@@ -1,64 +1,18 @@
-import QuickMenu from "@/components/sections/quick-menu";
-import TopMenu from "@/components/sections/top-menu";
-import Head from "next/head";
 import {
   GET_ALL_POST,
   GET_ALL_SEMESTER,
   GET_POST_BY_SLUG,
   GET_POST_BY_SUBJECT_SLUG,
 } from "graphql/queries";
-import { useState } from "react";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import RelatedPosts from "@/components/sections/related-posts";
 import { graphcms } from "graphql/graphCmsClient";
-import MobileMenu from "@/components/sections/mobile-menu";
 import { BiLike, BiComment, BiShare } from "react-icons/bi";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
-import Image from "next/image";
-import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
 import Layout from "@/layout/layout";
-
-const components = {
-  wrapper: (props) => (
-    <div className="text-[1.125rem] text-gray-200 md:text-justify text-left">
-      <main>{props.children}</main>
-    </div>
-  ),
-  p: (props) => (
-    <p
-      className="pb-8 text-[#c6c6c6]"
-      style={{
-        lineHeight: "1.77777778",
-        fontSize: "1.125rem",
-      }}
-    >
-      {props.children}
-    </p>
-  ),
-
-  h3: (props) => (
-    <h1 className="text-2xl font-semibold py-6 mt-10 border-t-2 border-gray-800 border-opacity-50">
-      {props.children}
-    </h1>
-  ),
-  strong: (props) => (
-    <strong className="text-lg font-bold text-gray-200">
-      {props.children}
-    </strong>
-  ),
-  em: (props) => <em className="text-lg">{props.children}</em>,
-  li: (props) => (
-    <ul className="list-disc ml-8 pb-2">
-      <li className="font-semibold text-[#c6c6c6] text-lg">{props.children}</li>
-    </ul>
-  ),
-  img: (props) => <Image {...props} width={2250} height={1390} />,
-
-  custom: (props) => <span>{props.children}</span>,
-};
+import { MDXComponents } from "@/components/mdxComponents";
 
 export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 
@@ -76,13 +30,12 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
           <div className="px-2 lg:px-10 w-full pb-24">
             <div className="flex flex-col gap-10 ">
               <div className=" border-b-2 border-gray-800 border-opacity-50 py-10">
-                {/* {postContent?.coverImage?.url?<Image src={postContent.coverImage.url} width={2250} height={1390}/>:<></>} */}
                 <h1 className="flex-grow max-w-max text-3xl font-semibold">
                   {postContent.title}
                 </h1>
               </div>
               <div className="md:px-8 px-0">
-                <MDXRemote {...mdxContent} components={components} />
+                <MDXRemote {...mdxContent} components={MDXComponents} />
               </div>
             </div>
             <div className="mb-8 justify-center hidden">
