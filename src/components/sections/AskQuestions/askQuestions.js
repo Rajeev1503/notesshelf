@@ -103,7 +103,7 @@ export default function AskQuestions(props) {
               <li>Get answers relevant to topic you mention</li>
               <li>You can add word limit to answer's response</li>
               <li>Get answers relevant to topic you mention</li>
-              <li>You can add word limit to answers response</li>
+              <li>You can add word limit to answers responsess</li>
               <li>Get answers relevant to topic you mention</li>
             </ul>
           </div>
