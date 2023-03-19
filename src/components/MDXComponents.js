@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export const MDXComponents = {
+const MDXComponents = {
     wrapper: (props) => (
       <div className="text-[1rem] text-gray-200 md:text-justify text-left">
         <main>{props.children}</main>
@@ -40,3 +40,5 @@ export const MDXComponents = {
       <div className="bg-[#13131e] p-4 rounded-lg my-4">{props.children}</div>
     ),
   };
+
+  export default MDXComponents;
