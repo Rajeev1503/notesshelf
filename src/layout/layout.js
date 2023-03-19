@@ -31,7 +31,7 @@ export default function Layout({
         className="bg-app-background flex flex-col w-full text-lighttext pb-24 sm:pb-0"
         style={{ height: "100vh" }}
       >
-        <div className="p-2 border-b border-border-dark border-opacity-20 shadow-md">
+        <div className="p-1 border-b border-border-dark border-opacity-20 shadow-md">
           <TopMenu
             enableShareButton={enableShareButton}
             enableAskQuestionButton={enableAskQuestionButton}
@@ -42,7 +42,7 @@ export default function Layout({
         </div>
         <div
           className="flex flex-row justify-between w-full h-full"
-          style={{ height: "90vh" }}
+          style={{ height: "92.6vh" }}
         >
           <div
             className={`bg-app-background scrollbarfeature border-r border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
@@ -63,7 +63,7 @@ export default function Layout({
             </div>
           </div>
 
-          <div className="scrollbarfeature sm:w-2/3 lg:w-[82%] w-full h-full flex flex-col gap-4 overflow-y-scroll pb-0">
+          <div className={`scrollbarfeature w-full h-full flex flex-col gap-4 overflow-y-scroll pb-0 ${relatedPost ?'sm:w-2/3 lg:w-[64%]' : 'sm:w-2/3 lg:w-[82%]'}`}>
             {children}
           </div>
           {relatedPost ? (

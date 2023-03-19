@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaShare } from "react-icons/fa";
 import logo from "../../../public/icons/icon-512x512.png";
-import AskQuestions from "./AskQuestions/askQuestions";
 
 export default function TopMenu(props) {
   const [clipBoardVariable, setClipBoardVariable] = useState(false);
+  const { subjectId, postId } = useRouter().query;
 
   function clipBoardCopiedHandler() {
     if (clipBoardVariable) {
@@ -23,11 +23,20 @@ export default function TopMenu(props) {
     );
   }
 
-  const { subjectId, postId } = useRouter().query;
+  function subjectNameShortner(subjectName) {
+      const subjectNameArr = subjectName.split('-');
+      let subjectNameShortened;
+      if(subjectNameArr.length>6){
+       subjectNameArr.splice(4,subjectNameArr.length-4, '...')
+      }
+      subjectNameShortened = subjectNameArr.join(' ')
+      return subjectNameShortened
+  }
+
 
   return (
-    <div className="flex flex-row justify-between items-center px-2">
-      <div className="w-[18%] font-bold py-1">
+    <div className="flex flex-row justify-between items-center p-2">
+      <div className="md:w-[18%] w-1/4 font-bold py-1">
         <Link
           className="max-w-min flex justify-start items-center gap-1"
           href="/"
@@ -40,12 +49,15 @@ export default function TopMenu(props) {
       </div>
 
       <div
-        className={`w-[40%] px-2 hidden md:flex justify-start capitalize text-sm font-semibold py-1 ${
+        className={`md:w-[40%] w-1/2 px-2 flex md:justify-start justify-center capitalize text-sm font-semibold ${
           props?.enableShareButton ? "" : "hidden"
         }`}
       >
         {props?.enableShareButton ? (
-          <div>
+          <div className="w-full">
+            <Link href={`/${subjectId}`} className="md:hidden min-w-full flex justify-center">
+              {subjectNameShortner(subjectId)}
+            </Link>
             <Link href={`/${subjectId}`} className="hidden sm:block">
               {subjectId.split("-").join(" ")}
             </Link>
@@ -55,14 +67,14 @@ export default function TopMenu(props) {
         )}
       </div>
 
-      <div className="w-[24%] py-1">
+      <div className="w-[24%] md:block hidden">
         {props.enableAskQuestionButton ? (
           <div className="w-full flex justify-end gap-2 items-center ">
             <div
               className="w-full hidden md:inline"
               onClick={props.askQuestionDisplay}
             >
-              <button className="w-full border min-w-max border-white text-lighttext py-1 px-2 rounded-lg cursor-pointer text-xs">
+              <button className="w-full min-w-max border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-50 backdrop-filter bg-card-dark py-1 px-2 rounded-lg cursor-pointer text-xs">
                 Ask Questions
               </button>
             </div>
@@ -72,7 +84,7 @@ export default function TopMenu(props) {
         )}
       </div>
 
-      <div className="w-[18%] py-1">
+      <div className="md:w-[18%] w-1/4">
         {props.enableShareButton ? (
           <div className="flex justify-end gap-2 items-center ">
             <div

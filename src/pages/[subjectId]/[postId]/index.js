@@ -72,7 +72,6 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
       enableAskQuestionButton={true}
       enableRelatedMenu={true}
     >
-      <div className="sm:w-[64%] w-full font-normal scrollbarfeature h-full overflow-y-scroll">
         <div className="mt-2 sm:w-[90%] w-[98%] m-auto h-full p-2 rounded-lg">
           <div className="px-2 lg:px-10 w-full pb-24">
             <div className="flex flex-col gap-10 ">
@@ -101,7 +100,6 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
             </div>
           </div>
         </div>
-      </div>
     </Layout>
   );
 }

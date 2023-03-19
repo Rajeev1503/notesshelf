@@ -1,8 +1,3 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import QuickMenu from "@/components/sections/quick-menu";
-import TopMenu from "@/components/sections/top-menu";
 import CategorisedPosts from "@/components/sections/categorised-posts";
 import {
   GET_ALL_SEMESTER,
@@ -11,29 +6,20 @@ import {
   GET_SUBJECT_BY_SLUG,
 } from "graphql/queries";
 import { graphcms } from "graphql/graphCmsClient";
-import MobileMenu from "@/components/sections/mobile-menu";
-import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
 import Layout from "@/layout/layout";
 
 export default function Subject({ posts, subject, semesters }) {
-  const [toggleMobileQuickMenu, setToggleMobileQuickMenu] = useState(true);
-  const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
 
   return (
     <Layout
-    title={`${subject.subjectName} - NotesShelf`}
+      title={`${subject.subjectName} - NotesShelf`}
       semesters={semesters}
       relatedPost={false}
       enableShareButton={true}
       enableAskQuestionButton={true}
       enableRelatedMenu={false}
-      
-      >
-      
-          <div className="scrollbarfeature sm:w-2/3 lg:w-[82%] w-full h-full flex flex-col gap-4 overflow-y-scroll">
-            <CategorisedPosts posts={posts} semesters={semesters} />
-          </div>
-        
+    >
+      <CategorisedPosts posts={posts} semesters={semesters} />
     </Layout>
   );
 }

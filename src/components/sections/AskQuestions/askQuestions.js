@@ -110,7 +110,7 @@ export default function AskQuestions(props) {
           <MdInfo className="cursor-pointer text-gray-600"/>
             Tips
           </div>
-          <div className={`${openInfoWindow?'': 'hidden'} absolute top-8 bg-gray-900 rounded-lg px-4 py-4`}>
+          <div className={`${openInfoWindow?'': 'hidden'} absolute top-8 bg-gray-900 rounded-lg px-4 py-4 w-[60%]`}>
               <button className="relative bottom-4 left-full text-gray-500 font-semibold" onClick={()=>SetOpenInfoWindow(false)}>x</button>
               <ul className="list-disc ml-2 italic text-gray-500 font-semibold text-xs">
                 <li>
