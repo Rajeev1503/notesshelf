@@ -37,7 +37,7 @@ export default function Cards(props) {
             return (
               <div
                 key={e.id}
-                className="h-full p-4 rounded-lg grid grid-rows-1 gap-2 border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-50 backdrop-filter bg-card-dark"
+                className="h-full p-4 rounded-lg grid grid-rows-1 gap-2 border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-40 backdrop-filter bg-card-dark"
               >
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
                   <div className="pb-2">

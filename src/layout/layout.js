@@ -63,8 +63,9 @@ export default function Layout({
             </div>
           </div>
 
-          {children}
-
+          <div className="scrollbarfeature sm:w-2/3 lg:w-[82%] w-full h-full flex flex-col gap-4 overflow-y-scroll pb-0">
+            {children}
+          </div>
           {relatedPost ? (
             <div
               className={`z-40 bg-app-background scrollbarfeature border-l border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${

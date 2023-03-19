@@ -154,7 +154,7 @@ export default function AskQuestions(props) {
           >
             <div className="bg-gray-600 p-2 w-full rounded-lg flex flex-row md:gap-4 gap-2">
               <div className="leading-7 text-[16px] text-justify flex flex-row gap-4 items-start">
-                <span className="rounded-full bg-[#13131e] p-1 px-2 text-xs mt-1">
+                <span className="rounded-full bg-app-background p-1 px-2 text-xs mt-1">
                   Question
                 </span>
                 {inputValue}
@@ -162,7 +162,7 @@ export default function AskQuestions(props) {
             </div>
             <div className={`p-2 w-full rounded-lg `}>
               <div className="leading-7 text-[16px] text-justify">
-                <div className="rounded-full bg-[#13131e] p-1 px-2 text-xs mt-1 w-min">
+                <div className="rounded-full bg-app-background p-1 px-2 text-xs mt-1 w-min">
                   Answer
                 </div>
                 {answerLoading === "loading" ? (

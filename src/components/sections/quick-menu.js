@@ -82,10 +82,10 @@ export default function QuickMenu(props) {
                       >
                         <div className="text-sm sm:text-xs mt-2 font-semibold pl-2">
                           <div
-                            className={`w-full border border-border-dark rounded-lg cursor-pointer px-2 py-2 ${
+                            className={`w-full border border-card-dark rounded-lg cursor-pointer px-2 py-2 ${
                               subjectId == z.slug
                                 ? "border-r-accent-color text-accent-color scale-110"
-                                : "border-r-border-dark text-[#bbb] hover:text-[#fff] hover:scale-105"
+                                : "border-r-card-dark text-[#bbb] hover:text-[#fff] hover:scale-105"
                             }`}
                           >
                             <span>{z.subjectName}</span>
