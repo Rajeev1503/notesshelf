@@ -12,7 +12,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import Layout from "@/layout/layout";
-import { MDXComponents } from "@/components/mdxComponents";
+import {MDXComponents} from "@/components/mdxComponents";
 
 export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 
