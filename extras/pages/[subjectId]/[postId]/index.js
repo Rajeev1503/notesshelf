@@ -18,7 +18,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import Image from "next/image";
-import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
+import AskQuestions from "@/components/AskQuestions/askQuestions";
 
 const components = {
   wrapper: (props) => (

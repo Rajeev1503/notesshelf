@@ -78,7 +78,7 @@ export default function QuickMenu(props) {
                       <Link
                         href={`/${z.slug}`}
                         key={z.id}
-                        onClick={props.toggleMobileQuickMenu}
+                        onClick={props.toggleAllMenus}
                       >
                         <div className="text-sm sm:text-xs mt-2 font-semibold pl-2">
                           <div

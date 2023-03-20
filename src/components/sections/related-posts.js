@@ -31,7 +31,7 @@ export default function RelatedPosts(props) {
                     <Link
                 href={`/${e.subject.slug}/${e.slug}`}
                 key={e.id}
-                onClick={props.toggleMobileRelatedMenu}
+                onClick={props.toggleAllMenus}
               >
                 <div className=" text-xs flex flex-row flex-wrap gap-4 mt-2 font-semibold">
                   <div className="flex justify-between items-center gap-2 w-full border border-[#1a1a2e] text-[#bbb] hover:text-[#fff] hover:scale-105 cursor-pointer rounded-lg px-2 py-2">

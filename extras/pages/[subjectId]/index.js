@@ -12,7 +12,7 @@ import {
 } from "graphql/queries";
 import { graphcms } from "graphql/graphCmsClient";
 import MobileMenu from "@/components/sections/mobile-menu";
-import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
+import AskQuestions from "@/components/AskQuestions/askQuestions";
 
 export default function Subject({ posts, subject, semesters }) {
   const [toggleMobileQuickMenu, setToggleMobileQuickMenu] = useState(true);

@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import RelatedPosts from "@/components/sections/related-posts";
 import MobileMenu from "@/components/sections/mobile-menu";
-import AskQuestions from "@/components/sections/AskQuestions/askQuestions";
+import AskQuestions from "@/components/AskQuestions/askQuestions";
 
 export default function Layout({
   title,
@@ -45,7 +45,7 @@ export default function Layout({
           style={{ height: "92.6vh" }}
         >
           <div
-            className={`bg-app-background scrollbarfeature border-r border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
+            className={`bg-app-background scrollbarfeature border-r border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-1/3 xl:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
               !toggleMobileQuickMenu ? "absolute z-40 md:z-0" : "hidden"
             } `}
           >
@@ -53,7 +53,11 @@ export default function Layout({
               <div className="w-5/6 sm:w-full">
                 <QuickMenu
                   semesters={semesters}
-                  toggleMobileQuickMenu={() => setToggleMobileQuickMenu(true)}
+                  toggleAllMenus={() => {
+                    setToggleMobileQuickMenu(true);
+                    setToggleMobileRelatedMenu(true);
+                    setAskQuestionDisplay(false);
+                  }}
                 />
               </div>
               <div
@@ -63,12 +67,16 @@ export default function Layout({
             </div>
           </div>
 
-          <div className={`scrollbarfeature w-full h-full flex flex-col gap-4 overflow-y-scroll pb-0 ${relatedPost ?'sm:w-2/3 lg:w-[64%]' : 'sm:w-2/3 lg:w-[82%]'}`}>
+          <div
+            className={`scrollbarfeature w-full h-full flex flex-col gap-4 overflow-y-scroll pb-0 ${
+              relatedPost ? "sm:w-2/3 lg:w-[64%]" : "sm:w-2/3 lg:w-[82%]"
+            }`}
+          >
             {children}
           </div>
           {relatedPost ? (
             <div
-              className={`z-40 md:z-0 bg-app-background scrollbarfeature border-l border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
+              className={`z-40 md:z-0 bg-app-background scrollbarfeature border-l border-border-dark border-opacity-20 shadow-md sm:w-1/3 lg:w-1/3 xl:w-[18%] p-4 h-full overflow-y-scroll sm:block ${
                 !toggleMobileRelatedMenu
                   ? "absolute right-0 w-[90%] px-8 z-2"
                   : "hidden"
@@ -76,7 +84,11 @@ export default function Layout({
             >
               <RelatedPosts
                 allPosts={allPosts}
-                toggleMobileRelatedMenu={() => setToggleMobileRelatedMenu(true)}
+                toggleAllMenus={() => {
+                  setToggleMobileQuickMenu(true);
+                  setToggleMobileRelatedMenu(true);
+                  setAskQuestionDisplay(false);
+                }}
               />
             </div>
           ) : (

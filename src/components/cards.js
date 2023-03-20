@@ -31,7 +31,7 @@ export default function Cards(props) {
   }
 
   return (
-    <div className="grid lg:grid-cols-3 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 grid-cols-1 gap-4">
+    <div className="grid lg:grid-cols-2 xl:grid-cols-3 grid-cols-1 gap-4">
       {props.posts
         ? props.posts.map((e) => {
             return (
@@ -49,6 +49,7 @@ export default function Cards(props) {
                           alt={e.title}
                           width={960}
                           height={540}
+                          priority={false}
                         />
                       </div>
                     ) : (
