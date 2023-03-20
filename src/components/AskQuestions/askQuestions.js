@@ -65,6 +65,7 @@ export default function AskQuestions(props) {
       const stored = localStorage.getItem(subjectId);
       setQuestionAsked(stored ? JSON.parse(stored) : []);
       history = stored ? JSON.parse(stored) : [];
+      setCurrentQuestionAsked([])
     }
   }, [subjectId]);
 
@@ -85,7 +86,7 @@ export default function AskQuestions(props) {
             inputValue +
               ` answer question with respect to subject ${subjectId
                 .split("-")
-                .join(" ")} always elaborate the answer`
+                .join(" ")}`
           ),
         }
       );
@@ -211,10 +212,7 @@ export default function AskQuestions(props) {
                     </div>
                   </div>
                   <div className={`p-2 w-full rounded-lg `}>
-                    <div className="leading-7 text-[16px] text-justify">
-                      <div className="rounded-full bg-card-dark p-1 px-2 text-xs mt-1 w-min">
-                        Answer
-                      </div>
+                    <div className="leading-7 text-[16px] text-justify px-4">
                       <div className={``}>
                         <MDXRemote {...e.answer} components={MDXComponents} />
                       </div>
@@ -235,10 +233,7 @@ export default function AskQuestions(props) {
                   </div>
                 </div>
                 <div className={`p-2 w-full rounded-lg `}>
-                  <div className="leading-7 text-[16px] text-justify">
-                    <div className="rounded-full bg-app-background p-1 px-2 text-xs mt-1 w-min">
-                      Answer
-                    </div>
+                  <div className="leading-7 text-[16px] text-justify px-4">
                     <div className={`py-2`}>Loading ...</div>
                   </div>
                 </div>
