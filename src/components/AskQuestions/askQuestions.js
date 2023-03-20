@@ -61,11 +61,12 @@ export default function AskQuestions(props) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("questionsAskedStorage");
+      console.log("useeffect")
+      const stored = localStorage.getItem(subjectId);
       setQuestionAsked(stored ? JSON.parse(stored) : []);
       history = stored ? JSON.parse(stored) : [];
     }
-  }, []);
+  }, [subjectId]);
 
   async function askQuestionFetchHandler() {
     setAnswerLoading("loading");
@@ -102,10 +103,10 @@ export default function AskQuestions(props) {
         mdxOptions: { development: process.env.NODE_ENV === "development" },
         rehypePlugins: [rehypeHighlightCodeBlock],
       });
-      history.push( {subjectId:subjectId, question: inputValue, answer: mdxSource });
+      history.push({ question: inputValue, answer: mdxSource });
       setQuestionAsked(history);
       setAnswerLoading("complete");
-      localStorage.setItem("questionsAskedStorage", JSON.stringify(history));
+      localStorage.setItem(subjectId, JSON.stringify(history));
     } catch (error) {
       console.log("error login try catch : " + error);
       return;
@@ -118,11 +119,17 @@ export default function AskQuestions(props) {
         maximiseWindow ? "md:w-[99%]" : "md:w-[60%]"
       }`}
     >
-      <div className={`${questionAsked.length==0? 'hidden':''} md:flex justify-between w-full px-2 py-1 border-b border-gray-800`}>
+      <div
+        className={`${
+          questionAsked.length == 0 ? "hidden" : ""
+        } md:flex justify-between w-full px-2 py-1 border-b border-gray-800`}
+      >
         <button
-          className={`${questionAsked.length==0? 'hidden':''} bg-red-500 text-xs font-semibold min-w-max p-1 px-2 rounded-lg cursor-pointer flex items-center`}
+          className={`${
+            questionAsked.length == 0 ? "hidden" : ""
+          } text-red-500 bg-gray-background text-xs font-semibold min-w-max p-1 px-2 rounded-lg cursor-pointer flex items-center`}
           onClick={() => {
-            localStorage.removeItem("questionsAskedStorage");
+            localStorage.removeItem(subjectId);
             setQuestionAsked([]);
             setCurrentQuestionAsked([]);
             history = [];
@@ -165,7 +172,9 @@ export default function AskQuestions(props) {
           >
             {questionAsked.length == 0 && currentQuestionAsked.length == 0 ? (
               <div className="relative top-24 font-semibold w-[90%] md:w-[70%] m-auto text-sm">
-                <p className="p-2 pb-4 text-xs rounded-lg text-gray-500">Tips</p>
+                <p className="p-2 pb-4 text-xs rounded-lg text-gray-500">
+                  Tips
+                </p>
                 <ul className="flex flex-col gap-2">
                   <li className="bg-card-dark p-2 px-4 rounded-lg">
                     You can add word limit to answers response
@@ -191,14 +200,11 @@ export default function AskQuestions(props) {
               <></>
             )}
             {questionAsked.map((e, index) => {
-
-              if(e.subjectId==subjectId){
               return (
-
-                <div key={index}>
+                <div className="pb-10" key={index}>
                   <div className="bg-gray-600 p-2 w-full rounded-lg flex flex-row md:gap-4 gap-2">
                     <div className="leading-7 text-[16px] text-justify flex flex-row gap-4 items-start">
-                      <span className="rounded-full bg-app-background p-1 px-2 text-xs mt-1">
+                      <span className="rounded-full bg-card-dark p-1 px-2 text-xs mt-1">
                         Question
                       </span>
                       {e.question}
@@ -206,7 +212,7 @@ export default function AskQuestions(props) {
                   </div>
                   <div className={`p-2 w-full rounded-lg `}>
                     <div className="leading-7 text-[16px] text-justify">
-                      <div className="rounded-full bg-app-background p-1 px-2 text-xs mt-1 w-min">
+                      <div className="rounded-full bg-card-dark p-1 px-2 text-xs mt-1 w-min">
                         Answer
                       </div>
                       <div className={``}>
@@ -215,8 +221,7 @@ export default function AskQuestions(props) {
                     </div>
                   </div>
                 </div>
-              );}
-              else return;
+              );
             })}
 
             {answerLoading === "loading" ? (
