@@ -4,18 +4,10 @@ import { FaHome } from "react-icons/fa";
 export default function MobileMenu({colorPalette, ...props}) {
 
   const {
-    current_mode,
     app_background,
     card_background,
-    small_card_background,
     border_color,
-    gray_background,
-    accent_background,
-    accent_text_color,
-    accent_border_color,
     main_text,
-    sub_text,
-    gray_text,
   } = colorPalette;
 
   return (

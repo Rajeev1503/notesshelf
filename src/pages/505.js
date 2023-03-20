@@ -1,8 +1,12 @@
 import Head from "next/head";
-import TopMenu from "@/components/sections/top-menu";
+import Image from "next/image";
+import logo from "../../public/icons/icon-512x512.png";
+import Link from "next/link";
+import { useContext } from "react";
+import { BackgroundColorContext } from "@/context/backgroundColorContext";
 
 export default function PageNotFound() {
-
+  const backgroundColorContext = useContext(BackgroundColorContext);
   return (
     <>
       <Head>
@@ -14,7 +18,23 @@ export default function PageNotFound() {
         style={{ height: "100vh" }}
       >
         <div className="p-2 border-b border-[#1a1a2e]">
-          <TopMenu />
+        <div
+      className={`flex flex-row justify-between items-center p-2 ${backgroundColorContext.backgroundColorState.main_text}`}
+    >
+      <div className="sm:w-1/4 max-w-max font-bold py-1">
+        <Link
+          className="max-w-max flex justify-start items-center gap-1"
+          href="/"
+        >
+          <Image src={logo} alt="logo" height={20} width={20} />
+          <p
+            className={`hidden md:inline-block text-xs md:text-normal ${backgroundColorContext.backgroundColorState.accent_text_color}`}
+          >
+            NotesShelf
+          </p>
+        </Link>
+      </div>
+      </div>
         </div>
         <div
           className="flex sm:flex-row flex-col w-full h-full"
