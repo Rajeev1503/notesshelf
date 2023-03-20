@@ -1,15 +1,33 @@
+import { BackgroundColorContext } from "@/context/backgroundColorContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaShare } from "react-icons/fa";
 
 export default function Cards(props) {
-  function excerptShortner(excerpt) {
+
+  
+  const backgroundColorContext = useContext(BackgroundColorContext);
+
+  function excerptShortner(excerpt, title) {
     let excerptArr = excerpt.split(" ");
-    if (excerptArr.length > 20) {
+    // if(title.length>4){
+      if (excerptArr.length > 20) {
       excerptArr.splice(20, excerptArr.length - 20, "...");
     }
+    // }
+    // else if(title.length>8){
+    //   if (excerptArr.length > 10) {
+    //     excerptArr.splice(10, excerptArr.length - 10, "...");
+    //   }
+    // }
+    // else {
+    //   if (excerptArr.length > 20) {
+    //     excerptArr.splice(20, excerptArr.length - 20, "...");
+    //   }
+    // }
+    
     return excerptArr.join(" ");
   }
 
@@ -37,7 +55,7 @@ export default function Cards(props) {
             return (
               <div
                 key={e.id}
-                className="h-full p-4 rounded-lg grid grid-rows-1 gap-2 border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-40 backdrop-filter bg-card-dark"
+                className={`h-full p-4 rounded-lg grid grid-rows-1 gap-2 shadow-md ${backgroundColorContext.backgroundColorState.card_background}`}
               >
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
                   <div className="pb-2">
@@ -71,12 +89,12 @@ export default function Cards(props) {
                   </div>
 
                   <div className=" h-min flex flex-col gap-2 rounded-lg overflow-hidden font-semibold">
-                    <div className="h-min text-[1.25rem]">
+                    <div className={`${backgroundColorContext.backgroundColorState.main_text} h-min text-[1.1rem]`}>
                       <p>{e.title}</p>
                     </div>
-                    <div className="text-gray-text text-[1rem]">
+                    <div className={`${backgroundColorContext.backgroundColorState.gray_text} text-[0.92rem]`}>
                       {e?.excerpt ? (
-                        <p>{excerptShortner(e.excerpt)}</p>
+                        <p>{excerptShortner(e.excerpt, e.title)}</p>
                       ) : (
                         <p>No preview Available</p>
                       )}
@@ -84,7 +102,7 @@ export default function Cards(props) {
                     <br />
                   </div>
                 </Link>
-                <div className="pb-2 flex flex-wrap justify-between items-center gap-2 text-center text-xs font-semibold text-lighttext rounded-lg">
+                <div className="pb-2 flex flex-wrap justify-between items-center gap-2 text-center text-xs font-semibold rounded-lg">
                   <div className="hidden flex-grow w-max bg-gray-background py-1 px-2 rounded-lg">
                     {e.category.map((category) => {
                       return (
@@ -93,7 +111,7 @@ export default function Cards(props) {
                     })}
                   </div>
                   <div
-                    className="flex-grow w-max bg-gray-background bg-opacity-30 py-2 px-2 rounded-lg cursor-pointer"
+                    className={`flex-grow w-max ${backgroundColorContext.backgroundColorState.sub_text} bg-opacity-50 ${backgroundColorContext.backgroundColorState.app_background} bg-opacity-50 py-2 px-2 rounded-lg cursor-pointer`}
                     onClick={() => {
                       navigator.clipboard.writeText(
                         process.env.NODE_ENV == "production"

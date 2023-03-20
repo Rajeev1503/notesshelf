@@ -1,11 +1,12 @@
+import { BackgroundColorContext } from "@/context/backgroundColorContext";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaShare } from "react-icons/fa";
 import logo from "../../../public/icons/icon-512x512.png";
 
-export default function TopMenu(props) {
+export default function TopMenu({ colorPalette, ...props }) {
   const [clipBoardVariable, setClipBoardVariable] = useState(false);
   const { subjectId, postId } = useRouter().query;
 
@@ -24,38 +25,54 @@ export default function TopMenu(props) {
   }
 
   function subjectNameShortner(subjectName) {
-      const subjectNameArr = subjectName.split('-');
-      let subjectNameShortened;
-      if(subjectNameArr.length>6){
-       subjectNameArr.splice(4,subjectNameArr.length-4, '...')
-      }
-      subjectNameShortened = subjectNameArr.join(' ')
-      return subjectNameShortened
+    const subjectNameArr = subjectName.split("-");
+    let subjectNameShortened;
+    if (subjectNameArr.length > 6) {
+      subjectNameArr.splice(4, subjectNameArr.length - 4, "...");
+    }
+    subjectNameShortened = subjectNameArr.join(" ");
+    return subjectNameShortened;
   }
 
+  const backgroundColorContext = useContext(BackgroundColorContext);
+
+  const {
+    current_mode,
+    card_background,
+    accent_text_color,
+    accent_border_color,
+    main_text,
+  } = colorPalette;
 
   return (
-    <div className="flex flex-row justify-between items-center p-2">
-      <div className="md:w-[18%] w-1/4 font-bold py-1">
+    <div
+      className={`flex flex-row justify-between items-center p-2 ${main_text}`}
+    >
+      <div className="sm:w-1/4 max-w-max font-bold py-1">
         <Link
-          className="max-w-min flex justify-start items-center gap-1"
+          className="max-w-max flex justify-start items-center gap-1"
           href="/"
         >
           <Image src={logo} alt="logo" height={20} width={20} />
-          <span className="md:inline text-xs md:text-normal text-accent-color text-opacity-70 ">
+          <p
+            className={`hidden md:inline-block text-xs md:text-normal ${accent_text_color}`}
+          >
             NotesShelf
-          </span>
+          </p>
         </Link>
       </div>
 
       <div
-        className={`md:w-[40%] w-1/2 px-2 flex md:justify-start justify-center capitalize text-sm font-semibold ${
+        className={`sm:w-1/2 max-w-max px-2 flex justify-evenly items-center gap-2 capitalize text-sm font-semibold border-x border-border-dark ${
           props?.enableShareButton ? "" : "hidden"
         }`}
       >
         {props?.enableShareButton ? (
-          <div className="w-full">
-            <Link href={`/${subjectId}`} className="md:hidden min-w-full flex justify-center">
+          <div className="">
+            <Link
+              href={`/${subjectId}`}
+              className="md:hidden min-w-full flex justify-center"
+            >
               {subjectNameShortner(subjectId)}
             </Link>
             <Link href={`/${subjectId}`} className="hidden sm:block">
@@ -65,26 +82,36 @@ export default function TopMenu(props) {
         ) : (
           ""
         )}
-      </div>
-
-      <div className="w-[24%] md:block hidden">
-        {props.enableAskQuestionButton ? (
-          <div className="w-full flex justify-end gap-2 items-center ">
+        <div className="md:block hidden">
+          {props.enableAskQuestionButton ? (
             <div
               className="w-full hidden md:inline"
               onClick={props.askQuestionDisplay}
             >
-              <button className="w-full min-w-max border-2 border-border-dark border-opacity-30 shadow-md bg-opacity-50 backdrop-filter bg-card-dark py-1 px-2 rounded-lg cursor-pointer text-xs">
+              <button
+                className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
+              >
                 Ask Questions
               </button>
             </div>
-          </div>
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
 
-      <div className="md:w-[18%] w-1/4">
+      <div className="sm:w-1/4 max-w-max md:w-full flex flex-row gap-2 justify-center">
+        <div
+          className={`border ${accent_border_color} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
+          onClick={() => {
+            if (current_mode === "dark") {
+              backgroundColorContext.backgroundColorDispatch({ type: "light" });
+            }
+            else backgroundColorContext.backgroundColorDispatch({type: "dark"})
+          }}
+        >
+          <p>Dark Mode : {(current_mode==='dark')?<span>ON</span>:<span>OFF</span>}</p>
+        </div>
         {props.enableShareButton ? (
           <div className="flex justify-end gap-2 items-center ">
             <div
@@ -102,7 +129,9 @@ export default function TopMenu(props) {
                 setClipBoardVariable(true);
               }}
             >
-              <div className="border border-accent-color text-accent-color min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs">
+              <div
+                className={`border ${accent_border_color} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
+              >
                 {clipBoardCopiedHandler()}
               </div>
             </div>

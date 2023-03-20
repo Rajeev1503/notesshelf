@@ -1,13 +1,29 @@
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
-export default function MobileMenu(props) {
+
+export default function MobileMenu({colorPalette, ...props}) {
+
+  const {
+    current_mode,
+    app_background,
+    card_background,
+    small_card_background,
+    border_color,
+    gray_background,
+    accent_background,
+    accent_text_color,
+    accent_border_color,
+    main_text,
+    sub_text,
+    gray_text,
+  } = colorPalette;
 
   return (
     <div className="sm:hidden fixed text-sm bottom-0 w-full mt-2 z-50">
-      <div className="flex flex-row items-center justify-start gap-4 py-2 border-t border-gray-700 bg-app-background bg-opacity-80 backdrop-blur text-white">
+      <div className={`flex flex-row items-center justify-start gap-4 py-2 border-t bg-opacity-80 backdrop-blur ${main_text, border_color, app_background}`}>
         <Link
           href="/"
-          className="w-[40px] flex justify-center items-center text-center font-semibold p-2 text-lighttext border-r border-gray-600 cursor-pointer"
+          className={`w-[40px] flex justify-center items-center text-center font-semibold p-2 border-r ${main_text, border_color, app_background} cursor-pointer`}
         >
           <FaHome />
         </Link>
@@ -15,16 +31,16 @@ export default function MobileMenu(props) {
         <div className="w-full flex flex-row justify-between items-center pr-4">
           <div
             onClick={props.toggleMobileQuickMenu}
-            className="w-[80px] rounded-3xl text-xs font-semibold border-2 p-2 px-4 border-gray-600 border-opacity-40 cursor-pointer"
+            className={`w-[80px] rounded-3xl text-xs font-semibold p-2 px-4 ${main_text} ${card_background} ${app_background} cursor-pointer`}
           >
-            <div>Subjects</div>
+            <div className="text-center">Subjects</div>
           </div>
 
           { props.enableAskQuestionButton?<div
-              className="w-[120px] rounded-3xl text-xs font-semibold border-2 p-2 px-4 border-white border-opacity-40 cursor-pointer"
+              className={`w-[120px] rounded-3xl text-xs font-semibold p-2 px-4 ${main_text} ${card_background} ${app_background} cursor-pointer`}
               onClick={props.askQuestionDisplay}
             >
-              <div className="">
+              <div className="text-center">
                 Ask Questions
               </div>
             </div>:<></>}
@@ -43,10 +59,10 @@ export default function MobileMenu(props) {
           <div
             className={`${
               props.enableRelatedMenu ? "" : "hidden"
-            } w-[80px] rounded-3xl text-xs font-semibold border-2 p-2 px-4 border-gray-600 border-opacity-40 cursor-pointer`}
+            } w-[80px] rounded-3xl text-xs font-semibold p-2 px-4 ${main_text} ${card_background} ${app_background} cursor-pointer`}
             onClick={props.toggleMobileRelatedMenu}
           >
-            <div className="">Related</div>
+            <div className="text-center">Related</div>
           </div>
         </div>
       </div>

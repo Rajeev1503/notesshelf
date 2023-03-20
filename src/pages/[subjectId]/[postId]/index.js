@@ -15,49 +15,47 @@ import Layout from "@/layout/layout";
 
 
 import Image from "next/image";
+import { useContext } from "react";
+import { BackgroundColorContext } from "@/context/backgroundColorContext";
 
-const MDXComponents = {
+
+export default function Post({ postContent, mdxContent, semesters, allPosts }) {
+
+  const backgroundColorContext = useContext(BackgroundColorContext);
+  const MDXComponents = {
     wrapper: (props) => (
-      <div className="text-[1rem] text-gray-200 md:text-justify text-left">
+      <div className="text-[1.125rem] leading-9 md:leading-9 text-text">
         <main>{props.children}</main>
       </div>
     ),
     p: (props) => (
-      <p
-        className="pb-8 text-[#c6c6c6]"
-        style={{
-          lineHeight: "1.77777778",
-          fontSize: "1rem",
-        }}
-      >
+      <p className={`${backgroundColorContext.backgroundColorState.sub_text}`}>
         {props.children}
       </p>
     ),
   
     h3: (props) => (
-      <h1 className="text-xl font-semibold py-6 mt-10 border-t-2 border-gray-800 border-opacity-50">
+      <h1 className={`text-xl font-semibold py-6 mt-10 border-t-2 ${backgroundColorContext.backgroundColorState.border_color} border-opacity-50`}>
         {props.children}
       </h1>
     ),
     strong: (props) => (
-      <strong className="text-lg font-bold text-gray-200">
+      <strong className="font-bold">
         {props.children}
       </strong>
     ),
     em: (props) => <em className="text-lg">{props.children}</em>,
     li: (props) => (
-      <ul className="list-disc ml-4 pb-2">
-        <li className="text-[#c6c6c6]">{props.children}</li>
+      <ul className="list-disc ml-8">
+        <li className="">{props.children}</li>
       </ul>
     ),
     img: (props) => <Image {...props} width={2250} height={1390} />,
   
     code: (props) => (
-      <div className="bg-[#13131e] p-4 rounded-lg my-4">{props.children}</div>
+      <div className={`${backgroundColorContext.backgroundColorState.card_background} p-4 rounded-lg my-4`}>{props.children}</div>
     ),
   };
-
-export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 
   return (
     <Layout
