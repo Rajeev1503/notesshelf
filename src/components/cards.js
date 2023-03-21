@@ -59,10 +59,10 @@ export default function Cards(props) {
               >
 
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
-                <div className="flex md:flex-row-reverse flex-col-reverse md:items-center md:justify-between md:gap-8 px-4 md:px-8">
-                  <div className="pb-2 md:w-[30%]">
+                <div className="flex lg:flex-row-reverse flex-col-reverse md:items-center lg:justify-between lg:gap-8 px-4 lg:px-8">
+                  <div className="pb-2 xl:w-[30%] lg:w-[40%]">
                     {e?.coverImage?.url ? (
-                      <div className="h-44 w-full">
+                      <div className="h-44 2xl:w-72 xl:w-64">
                         <Image
                           className="w-full h-full p-0 rounded-lg"
                           src={e.coverImage.url}
@@ -74,7 +74,7 @@ export default function Cards(props) {
                       </div>
                     ) : (
                       <div
-                        className={`h-44 rounded-lg flex items-center justify-center w-full px-4 text-3xl font-bold`}
+                        className={`h-44 2xl:w-72 xl:w-64 rounded-lg flex items-center justify-center px-4 text-3xl font-bold`}
                         style={{
                           backgroundImage: `linear-gradient(to right, rgb(${
                             Math.floor(Math.random() * 150) + 50
@@ -90,7 +90,7 @@ export default function Cards(props) {
                     )}
                   </div>
 
-                  <div className="md:w-[70%] h-min flex flex-col gap-2 rounded-lg overflow-hidden font-semibold">
+                  <div className="xl:w-[70%] lg:w-[60%] h-min flex flex-col gap-2 rounded-lg overflow-hidden font-semibold">
                     <div className={`${backgroundColorContext.backgroundColorState.main_text} h-min text-[1.4rem]`}>
                       <p>{e.title}</p>
                     </div>
@@ -106,7 +106,7 @@ export default function Cards(props) {
                   </div>
                 </div>
                 </Link>
-                <div className="pb-2 flex flex-row justify-start items-center gap-2 text-center text-xs font-semibold rounded-lg px-4 md:px-8">
+                <div className="pb-2 flex flex-row justify-start items-center gap-2 text-center text-xs font-semibold rounded-lg px-4 lg:px-8">
                   <div className={`flex-grow max-w-max py-1 px-2 rounded-lg ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
                     {e.category.map((category) => {
                       return (
