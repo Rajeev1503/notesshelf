@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
     switch (action.type) {
       case "dark": {
         return {
-          mode : "dark",
+          mode: "dark",
           app_background: "bg-[#000]",
           card_background: "bg-[#000807] border border-[#222]",
           small_card_background: "bg-[#9caf88] bg-opacity-50",
@@ -15,10 +15,10 @@ export default function App({ Component, pageProps }) {
           gray_background: "bg-[#374151]",
           accent_background: "bg-[#fff]",
           accent_text_color: "text-[#fff]",
-          accent_border_color:"border-[#fff]",
+          accent_border_color: "border-[#fff]",
           main_text: "text-[#E8E8E8]",
           sub_text: "text-[#fff]",
-          gray_text: "text-[#888]"
+          gray_text: "text-[#888]",
         };
       }
       case "light": {
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
           gray_background: "bg-[#374151]",
           accent_background: "bg-[#9caf88]",
           accent_text_color: "text-[#9caf88]",
-          accent_border_color:"border-[#9caf88]",
+          accent_border_color: "border-[#9caf88]",
           main_text: "text-[#000]",
           sub_text: "text-[#3D4040]",
           gray_text: "text-[#999493]",
@@ -44,18 +44,18 @@ export default function App({ Component, pageProps }) {
   const [backgroundColorState, backgroundColorDispatch] = useReducer(
     backgroundColorReducer,
     {
-      mode : "dark",
+      mode: "dark",
       app_background: "bg-[#000]",
       card_background: "bg-[#000807] border border-[#222]",
       small_card_background: "bg-[#9caf88] bg-opacity-50",
       border_color: "border-[#202020]",
       gray_background: "bg-[#374151]",
-      accent_background: "bg-[#9caf88]",
-      accent_text_color: "text-[#9caf88]",
-      accent_border_color:"border-[#9caf88]",
+      accent_background: "bg-[#fff]",
+      accent_text_color: "text-[#fff]",
+      accent_border_color: "border-[#fff]",
       main_text: "text-[#E8E8E8]",
       sub_text: "text-[#fff]",
-      gray_text: "text-[#888]"
+      gray_text: "text-[#888]",
     }
   );
 
