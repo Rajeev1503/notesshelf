@@ -15,16 +15,18 @@ import Layout from "@/layout/layout";
 
 
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BackgroundColorContext } from "@/context/backgroundColorContext";
 
 
 export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 
   const backgroundColorContext = useContext(BackgroundColorContext);
+  const [sliderValue, setSliderValue] = useState(17);
+
   const MDXComponents = {
     wrapper: (props) => (
-      <div className="text-[1.125rem] leading-9 md:leading-9 text-text">
+      <div className="" style={{fontSize:sliderValue+'px', lineHeight:sliderValue/9}}>
         <main>{props.children}</main>
       </div>
     ),
@@ -53,7 +55,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
     img: (props) => <Image {...props} width={2250} height={1390} />,
   
     code: (props) => (
-      <div className={`${backgroundColorContext.backgroundColorState.card_background} p-4 rounded-lg my-4`}>{props.children}</div>
+      <div className={`${backgroundColorContext.backgroundColorState.card_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>{props.children}</div>
     ),
   };
 
@@ -68,7 +70,25 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
       enableRelatedMenu={true}
     >
         <div className="mt-2 sm:w-[90%] w-[98%] m-auto h-full p-2 rounded-lg">
+
           <div className="px-2 lg:px-10 w-full pb-24">
+          <div
+            className={`${backgroundColorContext.backgroundColorState.card_background} w-full p-1 px-4 rounded-lg cursor-pointer min-w-max flex items-center justify-between gap-2`}
+          >
+            <span className="min-w-max text-xs font-semibold">Text Size</span>
+            <div className="w-full flex gap-2 items-center">
+              <button className="disabled:cursor-not-allowed" disabled={sliderValue<15} onClick={() => setSliderValue((prevValue)=>prevValue-1)}>-</button>
+              <input
+                type="range"
+                min="14"
+                max="25"
+                className="slider w-full"
+                value={sliderValue}
+                onChange={(e) => setSliderValue(e.target.value)}
+              />
+              <button className="disabled:cursor-not-allowed" disabled={sliderValue>24} onClick={() => setSliderValue((prevValue)=>prevValue+1)}>+</button>
+            </div>
+        </div>
             <div className="flex flex-col gap-10 ">
               <div className=" border-b-2 border-gray-800 border-opacity-50 py-10">
                 <h1 className="flex-grow max-w-max text-3xl font-semibold">

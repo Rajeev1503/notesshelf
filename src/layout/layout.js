@@ -36,10 +36,16 @@ export default function Layout({
       backgroundColorContext.backgroundColorState.gray_background,
     accent_background:
       backgroundColorContext.backgroundColorState.accent_background,
+    accent_background_opacity:
+      backgroundColorContext.backgroundColorState.accent_background_opacity,
     accent_text_color:
       backgroundColorContext.backgroundColorState.accent_text_color,
+    accent_text_color_opacity:
+      backgroundColorContext.backgroundColorState.accent_text_color_opacity,
     accent_border_color:
       backgroundColorContext.backgroundColorState.accent_border_color,
+    accent_border_color_opacity:
+      backgroundColorContext.backgroundColorState.accent_border_color_opacity,
     main_text: backgroundColorContext.backgroundColorState.main_text,
     sub_text: backgroundColorContext.backgroundColorState.sub_text,
     gray_text: backgroundColorContext.backgroundColorState.gray_text,

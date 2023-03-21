@@ -4,50 +4,38 @@ import { TbSend } from "react-icons/tb";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { MdClose, MdMinimize, MdMaximize } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import rehypeHighlightCodeBlock from "@mapbox/rehype-highlight-code-block";
 import Image from "next/image";
 
 let history = [];
 
-
-export default function AskQuestions({colorPalette, ...props}) {
-
+export default function AskQuestions({ colorPalette, ...props }) {
   const {
-    current_mode,
     app_background,
     card_background,
     border_color,
-    gray_background,
-    accent_background,
-    accent_text_color,
-    accent_border_color,
-    main_text,
     sub_text,
-    gray_text
+    gray_text,
+    accent_background
   } = colorPalette;
 
   const MDXComponents = {
     wrapper: (props) => (
-      <div className="text-[1.125rem] leading-9 md:leading-9 text-text">
+      <div className={``} style={{fontSize:sliderValue+'px', lineHeight:sliderValue/9}}>
         <main>{props.children}</main>
       </div>
     ),
-    p: (props) => (
-      <p className={`${sub_text}`}>
-        {props.children}
-      </p>
-    ),
-  
+    p: (props) => <p className={`${sub_text}`}>{props.children}</p>,
+
     h3: (props) => (
-      <h1 className={`text-xl font-semibold py-6 mt-10 border-t-2 ${border_color} border-opacity-50`}>
+      <h1
+        className={`text-xl font-semibold py-6 mt-10 border-t-2 ${border_color} border-opacity-50`}
+      >
         {props.children}
       </h1>
     ),
-    strong: (props) => (
-      <strong className="font-bold">
-        {props.children}
-      </strong>
-    ),
+    strong: (props) => <strong className="font-bold">{props.children}</strong>,
     em: (props) => <em className="text-lg">{props.children}</em>,
     li: (props) => (
       <ul className="list-disc ml-8">
@@ -55,9 +43,11 @@ export default function AskQuestions({colorPalette, ...props}) {
       </ul>
     ),
     img: (props) => <Image {...props} width={2250} height={1390} />,
-  
+
     code: (props) => (
-      <div className={`${card_background} p-4 rounded-lg my-4`}>{props.children}</div>
+      <div className={`${card_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>
+        {props.children}
+      </div>
     ),
   };
 
@@ -65,17 +55,19 @@ export default function AskQuestions({colorPalette, ...props}) {
   const [currentQuestionAsked, setCurrentQuestionAsked] = useState([]);
   const [answerLoading, setAnswerLoading] = useState("");
   const [maximiseWindow, setMaximiseWindow] = useState(false);
+  const [clearHistoryToggle, setClearHistoryToggle] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [sliderValue, setSliderValue] = useState(17);
 
   const { subjectId } = useRouter().query;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      console.log("useeffect")
+      console.log("useeffect");
       const stored = localStorage.getItem(subjectId);
       setQuestionAsked(stored ? JSON.parse(stored) : []);
       history = stored ? JSON.parse(stored) : [];
-      setCurrentQuestionAsked([])
+      setCurrentQuestionAsked([]);
     }
   }, [subjectId]);
 
@@ -83,10 +75,7 @@ export default function AskQuestions({colorPalette, ...props}) {
     setAnswerLoading("loading");
     setCurrentQuestionAsked(inputValue);
     try {
-      const response = await fetch(
-        process.env.NODE_ENV == "production"
-          ? `https://notesshelf.vercel.app/api/askquestion`
-          : `http://localhost:3000/api/askquestion`,
+      const response = await fetch('/api/askquestion',
         {
           method: "POST",
           headers: {
@@ -131,24 +120,72 @@ export default function AskQuestions({colorPalette, ...props}) {
       }`}
     >
       <div
-        className={`${
-          questionAsked.length == 0 ? "hidden" : ""
-        } md:flex justify-between w-full px-2 py-1 border-b ${border_color}`}
+        className={`flex md:justify-between justify-evenly gap-2 text-xs font-semibold w-full px-2 py-2 border-b ${border_color}`}
       >
-        <button
+        <div
           className={`${
             questionAsked.length == 0 ? "hidden" : ""
-          } text-red-500 ${card_background} text-xs font-semibold min-w-max p-1 px-2 rounded-lg cursor-pointer flex items-center`}
+          } md:w-1/3 min-w-max flex items-center`}
           onClick={() => {
-            localStorage.removeItem(subjectId);
-            setQuestionAsked([]);
-            setCurrentQuestionAsked([]);
-            history = [];
+            setClearHistoryToggle(!clearHistoryToggle);
           }}
         >
-          Clear History (irreversible)
-        </button>
-        <div className="px-4 w-full p-1 hidden md:flex flex-row justify-end gap-2 text-xs">
+          <div
+            className={`${card_background} p-1 px-2 rounded-lg cursor-pointer max-w-max flex gap-1 items-center`}
+          >
+            <MdDelete  className="text-red-500"/>
+            Clear All
+          </div>
+
+          {clearHistoryToggle ? (
+            <div className={`absolute top-10 ${card_background} p-8 rounded-lg`}>
+              <div>Confirm delete? This action is irreversible</div>
+              <br/>
+              <div className="flex gap-2 items-center justify-center">
+                <button
+                className={`text-white bg-red-500 p-1 px-2 rounded-lg cursor-pointer max-w-max`}
+                  onClick={() => {
+                    localStorage.removeItem(subjectId);
+                    setQuestionAsked([]);
+                    setCurrentQuestionAsked([]);
+                    history = [];
+                    setClearHistoryToggle(false);
+                  }}
+                >
+                  Delete
+                </button>
+                <button
+                className={`${card_background} p-1 px-2 rounded-lg cursor-pointer max-w-max`}
+                onClick={() => setClearHistoryToggle(false)}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+
+        <div className="md:w-1/3 max-w-max">
+          <div
+            className={`${card_background} p-1 px-4 rounded-lg cursor-pointer min-w-max flex items-center justify-between gap-2`}
+          >
+            <span className="max-w-max">Text Size</span>
+            <div className="max-w-full flex gap-2 items-center">
+              <button className="disabled:cursor-not-allowed" disabled={sliderValue<15} onClick={() => setSliderValue((prevValue)=>prevValue-1)}>-</button>
+              <input
+                type="range"
+                min="14"
+                max="25"
+                className="slider w-24"
+                value={sliderValue}
+                onChange={(e) => setSliderValue(e.target.value)}
+              />
+              <button className="disabled:cursor-not-allowed" disabled={sliderValue>24} onClick={() => setSliderValue((prevValue)=>prevValue+1)}>+</button>
+            </div>
+          </div>
+        </div>
+        <div className="px-4 w-1/3 p-1 hidden md:flex flex-row justify-end gap-2 text-xs">
           {!maximiseWindow ? (
             <div
               className={`${card_background} p-1 rounded-full cursor-pointer`}
@@ -213,9 +250,13 @@ export default function AskQuestions({colorPalette, ...props}) {
             {questionAsked.map((e, index) => {
               return (
                 <div className="pb-10" key={index}>
-                  <div className={`${card_background} p-2 w-full rounded-lg flex flex-row md:gap-4 gap-2`}>
+                  <div
+                    className={`${card_background} p-2 w-full rounded-lg flex flex-row md:gap-4 gap-2`}
+                  >
                     <div className="font-semibold flex flex-row gap-4 items-start">
-                      <span className={`${app_background} bg-opacity-50 rounded-lg p-1 px-2 text-xs mt-1`}>
+                      <span
+                        className={`${app_background} bg-opacity-50 rounded-lg p-1 px-2 text-xs mt-1`}
+                      >
                         Question
                       </span>
                       {e.question}
@@ -234,8 +275,10 @@ export default function AskQuestions({colorPalette, ...props}) {
 
             {answerLoading === "loading" ? (
               <div>
-                <div className={`${card_background} p-2 w-full rounded-lg flex flex-row md:gap-4 gap-2`}>
-                    <div className="leading-7 text-[16px] text-justify flex flex-row gap-4 items-start">
+                <div
+                  className={`${card_background} p-2 w-full rounded-lg flex flex-row md:gap-4 gap-2`}
+                >
+                  <div className="leading-7 text-[16px] text-justify flex flex-row gap-4 items-start">
                     <span className="rounded-full bg-app-background p-1 px-2 text-xs mt-1">
                       Question
                     </span>
@@ -272,7 +315,10 @@ export default function AskQuestions({colorPalette, ...props}) {
               onChange={(e) => setInputValue(e.target.value)}
               value={inputValue}
             />
-            <button type="submit" className={`${card_background} rounded-lg px-4 py-1`}>
+            <button
+              type="submit"
+              className={`${accent_background} bg-opacity-50 rounded-lg px-4 py-1`}
+            >
               <TbSend />
             </button>
           </form>

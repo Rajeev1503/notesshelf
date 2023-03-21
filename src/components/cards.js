@@ -111,7 +111,7 @@ export default function Cards(props) {
                     })}
                   </div>
                   <div
-                    className={`flex-grow w-max ${backgroundColorContext.backgroundColorState.sub_text} bg-opacity-50 ${backgroundColorContext.backgroundColorState.app_background} bg-opacity-50 py-2 px-2 rounded-lg cursor-pointer`}
+                    className={`flex-grow w-fullcursor-pointer flex justify-end`}
                     onClick={() => {
                       navigator.clipboard.writeText(
                         process.env.NODE_ENV == "production"
@@ -121,7 +121,7 @@ export default function Cards(props) {
                       setClipBoardVariable(e.slug);
                     }}
                   >
-                    {clipBoardCopiedHandler(e.slug)}
+                    <div className={`max-w-max ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background} py-1 px-2 rounded-lg`}>{clipBoardCopiedHandler(e.slug)}</div>
                   </div>
                 </div>
               </div>

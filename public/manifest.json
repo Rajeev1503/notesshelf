@@ -1,12 +1,12 @@
 {
-  "theme_color": "#896bff",
-  "background_color": "#13131e",
+  "theme_color": "#9caf88",
+  "background_color": "#000",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "name": "NotesShelf",
   "short_name": "NotesShelf",
-  "description": "Notes App",
+  "description": "The Ultimate Digital Content For University Exams",
   "icons": [
     {
       "src": "icons/icon-192x192.png",

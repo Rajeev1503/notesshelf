@@ -63,7 +63,7 @@ export default function TopMenu({ colorPalette, ...props }) {
       </div>
 
       <div
-        className={`sm:w-1/2 max-w-max px-2 flex justify-evenly items-center gap-2 capitalize text-sm font-semibold border-x border-border-dark ${
+        className={`sm:w-1/2 max-w-max px-2 flex justify-evenly items-center gap-2 capitalize text-sm font-semibold ${
           props?.enableShareButton ? "" : "hidden"
         }`}
       >
@@ -101,17 +101,7 @@ export default function TopMenu({ colorPalette, ...props }) {
       </div>
 
       <div className="sm:w-1/4 max-w-max md:w-full flex flex-row gap-2 justify-center">
-        <div
-          className={`border ${accent_border_color} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
-          onClick={() => {
-            if (current_mode === "dark") {
-              backgroundColorContext.backgroundColorDispatch({ type: "light" });
-            }
-            else backgroundColorContext.backgroundColorDispatch({type: "dark"})
-          }}
-        >
-          <p>Dark Mode : {(current_mode==='dark')?<span>ON</span>:<span>OFF</span>}</p>
-        </div>
+
         {props.enableShareButton ? (
           <div className="flex justify-end gap-2 items-center ">
             <div
@@ -139,6 +129,17 @@ export default function TopMenu({ colorPalette, ...props }) {
         ) : (
           <></>
         )}
+                <div
+          className={`border ${accent_border_color} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
+          onClick={() => {
+            if (current_mode === "dark") {
+              backgroundColorContext.backgroundColorDispatch({ type: "light" });
+            }
+            else backgroundColorContext.backgroundColorDispatch({type: "dark"})
+          }}
+        >
+          <p>Dark Mode : {(current_mode==='dark')?<span>ON</span>:<span>OFF</span>}</p>
+        </div>
       </div>
     </div>
   );

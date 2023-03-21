@@ -23,7 +23,7 @@ export default function OnGoingExams(props) {
           return semester.subjects.map((subject) => {
             if (subject.isSubjectsExam) {
               return (
-                <Link href={`${subject.slug}`} key={subject.id} className={`hover:bg-opacity-100 cursor-pointer text-xs min-w-max ${backgroundColorContext.backgroundColorState.app_background} bg-opacity-50 rounded-lg px-2 py-1`}>
+                <Link href={`${subject.slug}`} key={subject.id} className={`hover:bg-opacity-100 cursor-pointer text-xs min-w-max ${backgroundColorContext.backgroundColorState.card_background} rounded-lg px-2 py-1`}>
                   {subject.subjectName}
                 </Link>
               );
