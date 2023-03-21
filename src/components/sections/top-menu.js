@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { FaShare } from "react-icons/fa";
+import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 import logo from "../../../public/icons/icon-512x512.png";
 
 export default function TopMenu({ colorPalette, ...props }) {
@@ -75,7 +76,7 @@ export default function TopMenu({ colorPalette, ...props }) {
             >
               {subjectNameShortner(subjectId)}
             </Link>
-            <Link href={`/${subjectId}`} className="hidden sm:block">
+            <Link href={`/${subjectId}`} className="hidden md:block">
               {subjectId.split("-").join(" ")}
             </Link>
           </div>
@@ -138,7 +139,7 @@ export default function TopMenu({ colorPalette, ...props }) {
             else backgroundColorContext.backgroundColorDispatch({type: "dark"})
           }}
         >
-          <p>Dark Mode : {(current_mode==='dark')?<span>ON</span>:<span>OFF</span>}</p>
+          <p>{(current_mode==='dark')?<span><MdDarkMode /></span>:<span><MdOutlineDarkMode /></span>}</p>
         </div>
       </div>
     </div>
