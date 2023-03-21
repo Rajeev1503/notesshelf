@@ -25,7 +25,8 @@ export default function QuickMenu({colorPalette, ...props}) {
     card_background,
     border_color,
     accent_text_color,
-    gray_text
+    gray_text,
+    sub_text
   } = colorPalette;
 
   return (
@@ -90,7 +91,7 @@ export default function QuickMenu({colorPalette, ...props}) {
                       >
                         <div className="text-sm sm:text-xs mt-2 font-semibold pl-2">
                           <div
-                            className={`w-full border ${border_color} border-opacity-20 hover:border-opacity-90 rounded-lg cursor-pointer px-2 py-2 ${
+                            className={`w-full ${sub_text} border ${border_color} border-opacity-20 hover:border-opacity-90 rounded-lg cursor-pointer px-2 py-2 ${
                               subjectId == z.slug
                                 ? accent_text_color+" "+ 'scale-110'
                                 : `hover:scale-105`

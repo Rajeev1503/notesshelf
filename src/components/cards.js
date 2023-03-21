@@ -49,13 +49,13 @@ export default function Cards(props) {
   }
 
   return (
-    <div className={` flex flex-col gap-2`}>
+    <div className={` flex flex-col md:gap-2`}>
       {props.posts
         ? props.posts.map((e) => {
             return (
               <div
                 key={e.id}
-                className={`h-full flex flex-col gap-2 md:justify-center shadow-md border-t md:border md:rounded-lg ${backgroundColorContext.backgroundColorState.border_color} py-8`}
+                className={`h-full flex flex-col gap-2 md:justify-center md:shadow-md border-t md:border md:rounded-lg ${backgroundColorContext.backgroundColorState.border_color} py-8`}
               >
 
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
@@ -74,7 +74,7 @@ export default function Cards(props) {
                       </div>
                     ) : (
                       <div
-                        className={`h-44 2xl:w-72 xl:w-64 rounded-lg flex items-center justify-center px-4 text-3xl font-bold`}
+                        className={`h-44 2xl:w-72 xl:w-64 text-white rounded-lg flex items-center justify-center px-4 text-3xl font-bold`}
                         style={{
                           backgroundImage: `linear-gradient(to right, rgb(${
                             Math.floor(Math.random() * 150) + 50

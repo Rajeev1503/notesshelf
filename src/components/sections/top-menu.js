@@ -46,7 +46,7 @@ export default function TopMenu({ colorPalette, ...props }) {
 
   return (
     <div
-      className={`flex flex-row justify-between items-center p-2 ${main_text}`}
+      className={`flex flex-row justify-between font-semibold items-center p-2 ${main_text}`}
     >
       <div className="sm:w-1/4 max-w-max font-bold py-1">
         <Link
@@ -63,7 +63,7 @@ export default function TopMenu({ colorPalette, ...props }) {
       </div>
 
       <div
-        className={`sm:w-1/2 max-w-max px-2 flex justify-evenly items-center gap-2 capitalize text-sm font-semibold ${
+        className={`sm:w-1/2 px-2 flex md:justify-start justify-evenly items-center gap-2 capitalize text-sm font-semibold ${
           props?.enableShareButton ? "" : "hidden"
         }`}
       >

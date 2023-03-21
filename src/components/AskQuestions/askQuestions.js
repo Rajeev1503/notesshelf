@@ -171,8 +171,8 @@ export default function AskQuestions({ colorPalette, ...props }) {
             className={`${card_background} p-1 px-4 rounded-lg cursor-pointer min-w-max flex items-center justify-between gap-2`}
           >
             <span className="max-w-max">Text Size</span>
-            <div className="max-w-full flex gap-2 items-center">
-              <button className="disabled:cursor-not-allowed" disabled={sliderValue<15} onClick={() => setSliderValue((prevValue)=>prevValue-1)}>-</button>
+            <div className="max-w-full flex items-center">
+              <button className="disabled:cursor-not-allowed px-2 rounded-full font-bold" disabled={sliderValue<15} onClick={() => setSliderValue((prevValue)=>prevValue-1)}>-</button>
               <input
                 type="range"
                 min="14"
@@ -181,7 +181,7 @@ export default function AskQuestions({ colorPalette, ...props }) {
                 value={sliderValue}
                 onChange={(e) => setSliderValue(e.target.value)}
               />
-              <button className="disabled:cursor-not-allowed" disabled={sliderValue>24} onClick={() => setSliderValue((prevValue)=>prevValue+1)}>+</button>
+              <button className="disabled:cursor-not-allowed px-2 rounded-full font-bold" disabled={sliderValue>24} onClick={() => setSliderValue((prevValue)=>prevValue+1)}>+</button>
             </div>
           </div>
         </div>
@@ -317,7 +317,7 @@ export default function AskQuestions({ colorPalette, ...props }) {
             />
             <button
               type="submit"
-              className={`${accent_background} bg-opacity-50 rounded-lg px-4 py-1`}
+              className={`${card_background} rounded-lg px-4 py-1`}
             >
               <TbSend />
             </button>

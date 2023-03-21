@@ -12,14 +12,14 @@ export default function Hero() {
           <div className="flex md:items-center gap-4 rounded-lg text-lighttext p-4">
             <div className="w-full rounded-lg p-4 flex flex-col gap-4 font-semibold">
               <div className="flex flex-col">
-                <span className={`${backgroundColorContext.backgroundColorState.sub_text} font-bold text-3xl`}>
+                <span className={`${backgroundColorContext.backgroundColorState.main_text} font-bold text-3xl`}>
                   Introducing
                 </span>
                 <span className={`text-[#2962ff] text-6xl font-bold`}>
                 NotesShelf
                 </span>
               </div>
-              <p className={`${backgroundColorContext.backgroundColorState.sub_text} sm:text-5xl text-4xl`}>
+              <p className={`${backgroundColorContext.backgroundColorState.main_text} sm:text-5xl text-4xl`}>
                 The ultimate digital content for<br /> University Exams
               </p>
               <div className={`${backgroundColorContext.backgroundColorState.sub_text} text-sm`}>
