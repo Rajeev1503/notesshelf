@@ -55,7 +55,7 @@ export default function TopMenu({ colorPalette, ...props }) {
         >
           <Image src={logo} alt="logo" height={20} width={20} />
           <p
-            className={`hidden md:inline-block text-xs md:text-normal ${accent_text_color}`}
+            className={`hidden md:inline-block text-xs md:text-normal text-[#2962ff]`}
           >
             NotesShelf
           </p>

@@ -11,7 +11,7 @@ export default function CategorisedPosts(props) {
   const categoryArray = [];
   let postArray = [];
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-center gap-8">
       <div className="md:w-[80%] w-[95%] m-auto mt-14">
         <OnGoingExams semesters={props.semesters} />
       </div>
@@ -40,7 +40,7 @@ export default function CategorisedPosts(props) {
                       if (e.category.includes(category)) postArray.push(e);
                     })}
 
-                    <div className="lg:px-4 px-4 md:p-0 md:w-[90%] m-auto mb-4">
+                    <div className="lg:px-4 md:p-0 md:w-[90%] m-auto mb-4">
                       <Cards posts={postArray} />
                     </div>
                   </div>

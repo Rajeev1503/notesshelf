@@ -10,26 +10,26 @@ export default function Cards(props) {
   
   const backgroundColorContext = useContext(BackgroundColorContext);
 
-  function excerptShortner(excerpt, title) {
-    let excerptArr = excerpt.split(" ");
-    // if(title.length>4){
-      if (excerptArr.length > 20) {
-      excerptArr.splice(20, excerptArr.length - 20, "...");
-    }
-    // }
-    // else if(title.length>8){
-    //   if (excerptArr.length > 10) {
-    //     excerptArr.splice(10, excerptArr.length - 10, "...");
-    //   }
-    // }
-    // else {
-    //   if (excerptArr.length > 20) {
-    //     excerptArr.splice(20, excerptArr.length - 20, "...");
-    //   }
-    // }
+  // function excerptShortner(excerpt, title) {
+  //   let excerptArr = excerpt.split(" ");
+  //   if(title.length>4){
+  //     if (excerptArr.length > 20) {
+  //     excerptArr.splice(20, excerptArr.length - 20, "...");
+  //   }
+  //   }
+  //   else if(title.length>8){
+  //     if (excerptArr.length > 10) {
+  //       excerptArr.splice(10, excerptArr.length - 10, "...");
+  //     }
+  //   }
+  //   else {
+  //     if (excerptArr.length > 20) {
+  //       excerptArr.splice(20, excerptArr.length - 20, "...");
+  //     }
+  //   }
     
-    return excerptArr.join(" ");
-  }
+  //   return excerptArr.join(" ");
+  // }
 
   const [linkCopied, setLinkCopied] = useState(false);
   const [clipBoardVariable, setClipBoardVariable] = useState(false);
@@ -49,18 +49,20 @@ export default function Cards(props) {
   }
 
   return (
-    <div className="grid lg:grid-cols-2 xl:grid-cols-3 grid-cols-1 gap-4">
+    <div className={` flex flex-col gap-2`}>
       {props.posts
         ? props.posts.map((e) => {
             return (
               <div
                 key={e.id}
-                className={`h-full p-4 rounded-lg grid grid-rows-1 gap-2 shadow-md ${backgroundColorContext.backgroundColorState.card_background}`}
+                className={`h-full flex flex-col gap-2 md:justify-center shadow-md border-t md:border md:rounded-lg ${backgroundColorContext.backgroundColorState.border_color} py-8`}
               >
+
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
-                  <div className="pb-2">
+                <div className="flex md:flex-row-reverse flex-col-reverse md:items-center md:justify-between md:gap-8 px-4 md:px-8">
+                  <div className="pb-2 md:w-[30%]">
                     {e?.coverImage?.url ? (
-                      <div className="h-[200px] w-full">
+                      <div className="h-44 w-full">
                         <Image
                           className="w-full h-full p-0 rounded-lg"
                           src={e.coverImage.url}
@@ -72,7 +74,7 @@ export default function Cards(props) {
                       </div>
                     ) : (
                       <div
-                        className={`rounded-lg h-[200px] flex items-center justify-center w-full px-4 text-3xl font-bold`}
+                        className={`h-44 rounded-lg flex items-center justify-center w-full px-4 text-3xl font-bold`}
                         style={{
                           backgroundImage: `linear-gradient(to right, rgb(${
                             Math.floor(Math.random() * 150) + 50
@@ -88,22 +90,24 @@ export default function Cards(props) {
                     )}
                   </div>
 
-                  <div className=" h-min flex flex-col gap-2 rounded-lg overflow-hidden font-semibold">
-                    <div className={`${backgroundColorContext.backgroundColorState.main_text} h-min text-[1.1rem]`}>
+                  <div className="md:w-[70%] h-min flex flex-col gap-2 rounded-lg overflow-hidden font-semibold">
+                    <div className={`${backgroundColorContext.backgroundColorState.main_text} h-min text-[1.4rem]`}>
                       <p>{e.title}</p>
                     </div>
                     <div className={`${backgroundColorContext.backgroundColorState.gray_text} text-[0.92rem]`}>
                       {e?.excerpt ? (
-                        <p>{excerptShortner(e.excerpt, e.title)}</p>
+                        // <p>{excerptShortner(e.excerpt, e.title)}</p>
+                        <p>{e.excerpt}</p>
                       ) : (
                         <p>No preview Available</p>
                       )}
                     </div>
                     <br />
                   </div>
+                </div>
                 </Link>
-                <div className="pb-2 flex flex-wrap justify-between items-center gap-2 text-center text-xs font-semibold rounded-lg">
-                  <div className="hidden flex-grow w-max bg-gray-background py-1 px-2 rounded-lg">
+                <div className="pb-2 flex flex-row justify-start items-center gap-2 text-center text-xs font-semibold rounded-lg px-4 md:px-8">
+                  <div className={`flex-grow max-w-max py-1 px-2 rounded-lg ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
                     {e.category.map((category) => {
                       return (
                         <span key={e.id}>{category.split("_").join(" ")}</span>
@@ -111,7 +115,7 @@ export default function Cards(props) {
                     })}
                   </div>
                   <div
-                    className={`flex-grow w-fullcursor-pointer flex justify-end`}
+                    className={`flex-grow max-w-max cursor-pointer flex justify-end`}
                     onClick={() => {
                       navigator.clipboard.writeText(
                         process.env.NODE_ENV == "production"
