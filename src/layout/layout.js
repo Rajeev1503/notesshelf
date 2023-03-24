@@ -1,12 +1,13 @@
 import QuickMenu from "@/components/sections/quick-menu";
 import TopMenu from "@/components/sections/top-menu";
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import RelatedPosts from "@/components/sections/related-posts";
 import MobileMenu from "@/components/sections/mobile-menu";
 import AskQuestions from "@/components/AskQuestions/askQuestions";
 import { BackgroundColorContext } from "@/context/backgroundColorContext";
 import OnGoingExams from "@/components/onGoingExams";
+import Chat from "@/components/sections/chat";
 
 export default function Layout({
   title,
@@ -18,9 +19,10 @@ export default function Layout({
   allPosts,
   children,
 }) {
-  const [toggleMobileQuickMenu, setToggleMobileQuickMenu] = useState(true);
+  const [toggleMobileQuickMenu, setToggleMobileQuickMenu] = useState(false);
   const [toggleMobileRelatedMenu, setToggleMobileRelatedMenu] = useState(true);
   const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
+  const [toggleChatDisplay, setToggleChatDisplay] = useState(false);
 
   const backgroundColorContext = useContext(BackgroundColorContext);
 
@@ -29,7 +31,7 @@ export default function Layout({
     app_background: backgroundColorContext.backgroundColorState.app_background,
     card_background:
       backgroundColorContext.backgroundColorState.card_background,
-      small_card_background:
+    small_card_background:
       backgroundColorContext.backgroundColorState.small_card_background,
     border_color: backgroundColorContext.backgroundColorState.border_color,
     gray_background:
@@ -66,6 +68,32 @@ export default function Layout({
     gray_text,
   } = colorPalette;
 
+  function showDockReducer(state, action) {
+    switch (action.type) {
+      case "SHOW_DOCK":
+        return true;
+      case "HIDE_DOCK":
+        return false;
+      default:
+        state;
+    }
+  }
+
+  const [showDockState, showDockDispatch] = useReducer(showDockReducer, true);
+
+  function wheelEventHandler(event) {
+    console.log(event.nativeEvent.wheelDelta);
+    if (event.nativeEvent.wheelDelta > 0) {
+      setTimeout(() => {
+        showDockDispatch({ type: "SHOW_DOCK" });
+      }, 200);
+    } else if (event.nativeEvent.wheelDelta < 0) {
+      setTimeout(() => {
+        showDockDispatch({ type: "HIDE_DOCK" });
+      }, 200);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -74,12 +102,10 @@ export default function Layout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div
-        className={`${app_background} flex flex-col w-full ${main_text} pb-24 sm:pb-0`}
+        className={`${app_background} overflow-hidden flex flex-col w-full ${main_text} pb-24 sm:pb-0`}
         style={{ height: "100vh" }}
       >
-        <div
-          className={`p-1 border-b ${border_color} border-opacity-50`}
-        >
+        <div className={`p-1 border-b ${border_color} border-opacity-50`}>
           <TopMenu
             colorPalette={colorPalette}
             enableShareButton={enableShareButton}
@@ -91,36 +117,13 @@ export default function Layout({
         </div>
         <div
           className="flex flex-row justify-between w-full h-full"
-          style={{ height: "92.6vh" }}
+          style={{ height: "92.5vh" }}
         >
           <div
-            className={`border-r ${border_color} border-opacity-50 sm:w-1/3 lg:w-1/3 xl:w-[18%] h-full sm:block ${
-              !toggleMobileQuickMenu ? "absolute z-40 md:z-0 w-full" : "hidden"
-            } `}
-          >
-            <div className="flex w-full h-full">
-              <div className={`${app_background} ${border_color} h-full w-[90%] sm:w-full scrollbarfeature overflow-y-scroll p-4 border-r border-opacity-20 md:border-none`}>
-                <QuickMenu
-                  colorPalette={colorPalette}
-                  semesters={semesters}
-                  toggleAllMenus={() => {
-                    setToggleMobileQuickMenu(true);
-                    setToggleMobileRelatedMenu(true);
-                    setAskQuestionDisplay(false);
-                  }}
-                />
-              </div>
-              <div
-                className="w-1/6 sm:hidden p-4"
-                onClick={() => setToggleMobileQuickMenu(true)}
-              ></div>
-            </div>
-          </div>
-
-          <div
             className={`scrollbarfeature w-full h-full flex flex-col gap-4 overflow-y-scroll pb-0 ${
-              relatedPost ? "sm:w-2/3 lg:w-[64%]" : "sm:w-2/3 lg:w-[82%]"
+              relatedPost ? "sm:w-2/3 lg:w-[64%]" : "sm:w-2/3 lg:w-[82%] m-auto"
             }`}
+            onWheel={(event) => wheelEventHandler(event)}
           >
             <div>{children}</div>
           </div>
@@ -137,7 +140,9 @@ export default function Layout({
                   className="w-1/6 sm:hidden p-4"
                   onClick={() => setToggleMobileRelatedMenu(true)}
                 ></div>
-                <div className={`${app_background} ${border_color} h-full w-[90%] sm:w-full scrollbarfeature overflow-y-scroll p-4 border-l border-opacity-20 md:border-none`}>
+                <div
+                  className={`${app_background} ${border_color} h-full w-[90%] sm:w-full scrollbarfeature overflow-y-scroll p-4 border-l border-opacity-20 md:border-none`}
+                >
                   <RelatedPosts
                     colorPalette={colorPalette}
                     allPosts={allPosts}
@@ -155,9 +160,9 @@ export default function Layout({
           )}
         </div>
         <MobileMenu
-        colorPalette={colorPalette}
+          colorPalette={colorPalette}
           toggleMobileQuickMenu={() => {
-            setToggleMobileRelatedMenu(true);
+            setToggleMobileRelatedMenu(false);
             setToggleMobileQuickMenu(!toggleMobileQuickMenu);
           }}
           toggleMobileRelatedMenu={() => {
@@ -165,15 +170,39 @@ export default function Layout({
             setToggleMobileQuickMenu(true);
           }}
           askQuestionDisplay={() => setAskQuestionDisplay(!askQuestionDisplay)}
+          toggleChatDisplay={() => setToggleChatDisplay(!toggleChatDisplay)}
           enableRelatedMenu={enableRelatedMenu}
           enableAskQuestionButton={enableAskQuestionButton}
+          showDockState={showDockState}
         />
+
+        <div
+          className={`${toggleMobileQuickMenu ? "flex items-center" : "hidden"}`}
+        >
+          <QuickMenu
+            colorPalette={colorPalette}
+            semesters={semesters}
+            toggleAllMenus={() => {
+              setToggleMobileQuickMenu(false);
+              setToggleMobileRelatedMenu(true);
+              setAskQuestionDisplay(false);
+            }}
+          />
+        </div>
         <div
           className={`${askQuestionDisplay ? "flex items-center" : "hidden"}`}
         >
           <AskQuestions
-        colorPalette={colorPalette}
+            colorPalette={colorPalette}
             askQuestionDisplay={() => setAskQuestionDisplay(false)}
+          />
+        </div>
+        <div
+          className={`${toggleChatDisplay ? "flex items-center" : "hidden"}`}
+        >
+          <Chat
+            colorPalette={colorPalette}
+            toggleChatDisplay={() => setToggleChatDisplay(false)}
           />
         </div>
       </div>

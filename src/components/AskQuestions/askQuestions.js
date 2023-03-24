@@ -115,8 +115,8 @@ export default function AskQuestions({ colorPalette, ...props }) {
 
   return (
     <div
-      className={`z-0 h-[87.2vh] md:h-[92.5vh] md:border-2 ${border_color} ${app_background} border-opacity-30 shadow-md flex flex-col items-center absolute right-1 md:right-2 top-[53px] rounded-lg w-[98%] ${
-        maximiseWindow ? "md:w-[99%]" : "md:w-[60%]"
+      className={`z-0 h-[87.2vh] md:h-[85vh] md:border ${card_background} ${app_background} shadow-md flex flex-col items-center absolute top-[45px] rounded-lg w-[98%] ${
+        maximiseWindow ? " md:left-2 md:w-[99%]" : " md:left-[25%] md:w-[60%]"
       }`}
     >
       <div

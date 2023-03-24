@@ -47,9 +47,9 @@ export default function TopMenu({ colorPalette, ...props }) {
 
   return (
     <div
-      className={`flex flex-row justify-between font-semibold items-center p-2 ${main_text}`}
+      className={`flex flex-row justify-between font-semibold items-center p-0 ${main_text}`}
     >
-      <div className="sm:w-1/4 max-w-max font-bold py-1">
+      <div className="sm:w-1/3 max-w-max font-bold py-1">
         <Link
           className="max-w-max flex justify-start items-center gap-1"
           href="/"
@@ -64,7 +64,7 @@ export default function TopMenu({ colorPalette, ...props }) {
       </div>
 
       <div
-        className={`sm:w-1/2 px-2 flex md:justify-start justify-evenly items-center gap-2 capitalize text-sm font-semibold ${
+        className={`sm:w-1/3 px-2 flex md:justify-center justify-evenly items-center gap-2 capitalize text-sm font-semibold ${
           props?.enableShareButton ? "" : "hidden"
         }`}
       >
@@ -83,25 +83,9 @@ export default function TopMenu({ colorPalette, ...props }) {
         ) : (
           ""
         )}
-        <div className="md:block hidden">
-          {props.enableAskQuestionButton ? (
-            <div
-              className="w-full hidden md:inline"
-              onClick={props.askQuestionDisplay}
-            >
-              <button
-                className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
-              >
-                Ask Questions
-              </button>
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
       </div>
 
-      <div className="sm:w-1/4 max-w-max md:w-full flex flex-row gap-2 justify-center">
+      <div className="sm:w-1/3 max-w-max md:w-full flex flex-row gap-2 justify-center">
 
         {props.enableShareButton ? (
           <div className="flex justify-end gap-2 items-center ">
@@ -121,7 +105,7 @@ export default function TopMenu({ colorPalette, ...props }) {
               }}
             >
               <div
-                className={`border ${accent_border_color} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
+                className={`min-w-max px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
               >
                 {clipBoardCopiedHandler()}
               </div>
@@ -130,17 +114,6 @@ export default function TopMenu({ colorPalette, ...props }) {
         ) : (
           <></>
         )}
-                <div
-          className={`border ${accent_border_color} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
-          onClick={() => {
-            if (current_mode === "dark") {
-              backgroundColorContext.backgroundColorDispatch({ type: "light" });
-            }
-            else backgroundColorContext.backgroundColorDispatch({type: "dark"})
-          }}
-        >
-          <p>{(current_mode==='dark')?<span><MdDarkMode /></span>:<span><MdOutlineDarkMode /></span>}</p>
-        </div>
       </div>
     </div>
   );
