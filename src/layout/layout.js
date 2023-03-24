@@ -85,8 +85,8 @@ export default function Layout({
             enableShareButton={enableShareButton}
             enableAskQuestionButton={enableAskQuestionButton}
             toggleAllMenus={{
-              toggleChatDisplay: (value) => setToggleChatDisplay(value),
-              askQuestionDisplay: (value) => setAskQuestionDisplay(value),
+              toggleChatDisplay: (value) => setToggleChatDisplay(toggleChatDisplay?false:value),
+              askQuestionDisplay: (value) => setAskQuestionDisplay(askQuestionDisplay?false:value),
             }}
           />
         </div>

@@ -55,7 +55,7 @@ export default function Cards(props) {
             return (
               <div
                 key={e.id}
-                className={`h-full flex flex-col gap-2 md:justify-center md:shadow-md border-t md:border md:rounded-lg ${backgroundColorContext.backgroundColorState.border_color} py-8`}
+                className={`h-full px-2 flex flex-col gap-2 md:justify-center md:shadow-md border-t md:border md:rounded-lg ${backgroundColorContext.backgroundColorState.border_color} py-8`}
               >
 
                 <Link href={`/${e.subject.slug}/${e.slug}`}>
