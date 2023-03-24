@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaGoogle, FaMicrosoft } from "react-icons/fa";
 import logo from '/public/icons/icon-512x512.png'
 
-const SignUp = (props) => {
+export default function SignUp (props) {
 
 const [ifLoading, setIfLoading] = useState(false)
 

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaGoogle, FaMicrosoft, FaFacebook } from "react-icons/fa";
 import logo from "/public/icons/icon-512x512.png";
-const SignIn = (props) => {
+export default function SignIn (props) {
   const [signInLoading, setSignInLoading] = useState(false);
 
   return (
@@ -76,5 +76,3 @@ const SignIn = (props) => {
     </div>
   );
 };
-
-export default SignIn;
