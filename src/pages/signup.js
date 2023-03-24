@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FaGoogle, FaMicrosoft } from "react-icons/fa";
-import logo from '/public/icons/icon-512x512.png'
 
 export default function SignUp (props) {
 
@@ -34,9 +33,6 @@ const [ifLoading, setIfLoading] = useState(false)
 
   return (
     <div className="py-8 flex flex-col gap-4 text-white text-sm font-semibold">
-      <div className="text-white flex flex-col gap-2 items-center font-semibold">
-        <Image src={logo} height={40} width={40}/>
-      </div>
       <div className="text-white text-center font-semibold">
         <h1 className="text-3xl tracking-wide">Welcome Back</h1>
       </div>

@@ -1,16 +1,39 @@
 import Image from "next/image";
 import { useState } from "react";
 import { FaGoogle, FaMicrosoft, FaFacebook } from "react-icons/fa";
-import logo from "/public/icons/icon-512x512.png";
+// import { getSession, signIn } from "next-auth/react";
 export default function SignIn (props) {
   const [signInLoading, setSignInLoading] = useState(false);
+
+  const onSubmitHandler = async (e) => {
+    setSignInLoading(true);
+    e.preventDefault();
+    const newUserHandler = {
+      usernameoremail: formState.inputs.usernameoremail.value,
+      password: formState.inputs.password.value,
+    };
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        usernameoremail: newUserHandler.usernameoremail,
+        password: newUserHandler.password,
+      });
+      if (!result.error) {
+        router.replace("/app");
+        setSignInLoading(false);
+      }
+    } catch (error) {
+      setSignInLoading(false);
+      throw new Error(
+        "Login failed message from signin page nextauth : " + error
+      );
+    }
+  };
 
   return (
     <div className="py-8 flex flex-col gap-4 text-white text-sm font-semibold">
       {signInLoading ? <div className="text-white">Loading...</div> : ""}
-      <div className="text-white flex flex-col gap-2 items-center font-semibold">
-        <Image src={logo} height={40} width={40} />
-      </div>
+
       <div className="text-white text-center font-semibold">
         <h1 className="text-3xl tracking-wide">Welcome Back</h1>
       </div>
@@ -21,7 +44,7 @@ export default function SignIn (props) {
             className="text-white flex flex-col gap-3 w-full"
             action="/api/user"
             method="POST"
-            // onSubmit={onSubmitHandler}
+            onSubmit={onSubmitHandler}
           >
             <input
               type="text"

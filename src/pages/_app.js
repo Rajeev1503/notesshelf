@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
         return {
           mode: "dark",
           app_background: "bg-[#000]",
-          card_background: "bg-[#000] border border-[#222]",
+          card_background: "bg-[#000] border border-[#202020]",
           small_card_background: "bg-[#9caf88] bg-opacity-50",
           border_color: "border-[#202020]",
           gray_background: "bg-[#374151]",
@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }) {
           accent_text_color: "text-[#fff]",
           accent_border_color: "border-[#fff]",
           main_text: "text-[#fff]",
-          sub_text: "text-[#ddd]",
+          sub_text: "text-[#999]",
           gray_text: "text-[#888]",
         };
       }

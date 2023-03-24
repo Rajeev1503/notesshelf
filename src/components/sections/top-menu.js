@@ -3,11 +3,11 @@ import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { FaShare } from "react-icons/fa";
+import { FaShareAlt } from "react-icons/fa";
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 import logo from "../../../public/icons/icon-512x512.png";
 
-export default function TopMenu({ colorPalette, ...props }) {
+export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
   const [clipBoardVariable, setClipBoardVariable] = useState(false);
   const { subjectId, postId } = useRouter().query;
 
@@ -19,7 +19,7 @@ export default function TopMenu({ colorPalette, ...props }) {
       <div className="flex items-center justify-center gap-1">
         <span>Share</span>
         <span>
-          <FaShare />
+          <FaShareAlt />
         </span>
       </div>
     );
@@ -47,24 +47,19 @@ export default function TopMenu({ colorPalette, ...props }) {
 
   return (
     <div
-      className={`flex flex-row justify-between font-semibold items-center p-0 ${main_text}`}
+      className={`flex flex-row justify-between font-semibold items-center p-2 ${main_text}`}
     >
-      <div className="sm:w-1/3 max-w-max font-bold py-1">
+      <div className="sm:w-1/4 max-w-max font-bold py-1">
         <Link
           className="max-w-max flex justify-start items-center gap-1"
           href="/"
         >
           <Image src={logo} alt="logo" height={20} width={20} />
-          <p
-            className={`hidden md:inline-block text-xs md:text-normal text-[#2962ff]`}
-          >
-            NotesShelf
-          </p>
         </Link>
       </div>
 
       <div
-        className={`sm:w-1/3 px-2 flex md:justify-center justify-evenly items-center gap-2 capitalize text-sm font-semibold ${
+        className={`sm:w-1/2 px-2 flex md:justify-center justify-center items-center gap-2 capitalize text-sm font-semibold ${
           props?.enableShareButton ? "" : "hidden"
         }`}
       >
@@ -85,8 +80,7 @@ export default function TopMenu({ colorPalette, ...props }) {
         )}
       </div>
 
-      <div className="sm:w-1/3 max-w-max md:w-full flex flex-row gap-2 justify-center">
-
+      <div className="sm:w-1/4 max-w-max md:w-full flex flex-row gap-2 justify-center">
         {props.enableShareButton ? (
           <div className="flex justify-end gap-2 items-center ">
             <div
@@ -105,7 +99,7 @@ export default function TopMenu({ colorPalette, ...props }) {
               }}
             >
               <div
-                className={`min-w-max px-2 rounded-lg cursor-pointer text-xs ${accent_text_color}`}
+                className={`${card_background} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs`}
               >
                 {clipBoardCopiedHandler()}
               </div>
@@ -114,6 +108,107 @@ export default function TopMenu({ colorPalette, ...props }) {
         ) : (
           <></>
         )}
+        <div className="md:block hidden">
+          {props.enableAskQuestionButton ? (
+            <div
+              className="w-full hidden md:inline"
+              onClick={() => {
+                toggleAllMenus.toggleChatDisplay(false);
+                toggleAllMenus.askQuestionDisplay(true);
+              }}
+            >
+              <button
+                className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
+              >
+                Ask Questions
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+
+        <div className="md:block hidden">
+          <div
+            className="w-full hidden md:inline"
+            onClick={() => {
+              toggleAllMenus.toggleChatDisplay(true);
+              toggleAllMenus.askQuestionDisplay(false);
+            }}
+          >
+            <button
+              className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
+            >
+              Group Study
+            </button>
+          </div>
+        </div>
+        <div className="md:block hidden">
+          <div
+            className="w-full hidden md:inline"
+            onClick={() => {
+              toggleAllMenus.toggleChatDisplay(false);
+              toggleAllMenus.askQuestionDisplay(true);
+            }}
+          >
+            <button
+              className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
+            >
+              My Bookmarks
+            </button>
+          </div>
+        </div>
+        <div className="md:block hidden">
+          <div
+            className="w-full hidden md:inline"
+            onClick={() => {
+              toggleAllMenus.toggleChatDisplay(false);
+              toggleAllMenus.askQuestionDisplay(true);
+            }}
+          >
+            <button
+              className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
+            >
+              Forum
+            </button>
+          </div>
+        </div>
+        <div>
+          <div
+            className="w-full hidden md:inline"
+            onClick={() => {
+              toggleAllMenus.toggleChatDisplay(false);
+              toggleAllMenus.askQuestionDisplay(true);
+            }}
+          >
+            <button
+              className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
+            >
+              Log Out
+            </button>
+          </div>
+        </div>
+        <div
+          className={`${card_background} min-w-max py-1 px-2 rounded-lg cursor-pointer text-xs flex items-center`}
+          onClick={() => {
+            if (current_mode === "dark") {
+              backgroundColorContext.backgroundColorDispatch({ type: "light" });
+            } else
+              backgroundColorContext.backgroundColorDispatch({ type: "dark" });
+          }}
+        >
+          <p>
+            {current_mode === "dark" ? (
+              <span>
+                <MdDarkMode />
+              </span>
+            ) : (
+              <span>
+                <MdOutlineDarkMode />
+              </span>
+            )}
+          </p>
+        </div>
       </div>
     </div>
   );

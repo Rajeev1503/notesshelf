@@ -3,30 +3,39 @@ import { useEffect, useState } from "react";
 import { TbSend } from "react-icons/tb";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { MdClose, MdMinimize, MdMaximize } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import rehypeHighlightCodeBlock from "@mapbox/rehype-highlight-code-block";
 import Image from "next/image";
+import WindowLayout from "../sections/windowLayout";
 
 let history = [];
 
 export default function AskQuestions({ colorPalette, ...props }) {
   const {
+    current_mode,
     app_background,
     card_background,
+    small_card_background,
     border_color,
+    gray_background,
+    accent_background,
+    accent_text_color,
+    accent_border_color,
+    main_text,
     sub_text,
     gray_text,
-    accent_background
   } = colorPalette;
 
   const MDXComponents = {
     wrapper: (props) => (
-      <div className={``} style={{fontSize:sliderValue+'px', lineHeight:sliderValue/9}}>
+      <div
+        className={``}
+        style={{ fontSize: sliderValue + "px", lineHeight: sliderValue / 9 }}
+      >
         <main>{props.children}</main>
       </div>
     ),
-    p: (props) => <p className={`${sub_text}`}>{props.children}</p>,
+    p: (props) => <p className={`${main_text} text-opacity-90`}>{props.children}</p>,
 
     h3: (props) => (
       <h1
@@ -45,7 +54,9 @@ export default function AskQuestions({ colorPalette, ...props }) {
     img: (props) => <Image {...props} width={2250} height={1390} />,
 
     code: (props) => (
-      <div className={`${card_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>
+      <div
+        className={`${card_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}
+      >
         {props.children}
       </div>
     ),
@@ -75,20 +86,18 @@ export default function AskQuestions({ colorPalette, ...props }) {
     setAnswerLoading("loading");
     setCurrentQuestionAsked(inputValue);
     try {
-      const response = await fetch('/api/askquestion',
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(
-            inputValue +
-              ` answer question with respect to subject ${subjectId
-                .split("-")
-                .join(" ")}`
-          ),
-        }
-      );
+      const response = await fetch("/api/askquestion", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(
+          inputValue +
+            ` answer question with respect to subject ${subjectId
+              .split("-")
+              .join(" ")}`
+        ),
+      });
 
       const responseDataJson = await response.json();
       if (!response.ok) {
@@ -114,109 +123,56 @@ export default function AskQuestions({ colorPalette, ...props }) {
   }
 
   return (
-    <div
-      className={`z-0 h-[87.2vh] md:h-[85vh] md:border ${card_background} ${app_background} shadow-md flex flex-col items-center absolute top-[45px] rounded-lg w-[98%] ${
-        maximiseWindow ? " md:left-2 md:w-[99%]" : " md:left-[25%] md:w-[60%]"
-      }`}
-    >
+    <WindowLayout colorPalette={colorPalette} sliderValue={sliderValue} setSliderValue={setSliderValue} toggleWindowClose={props.askQuestionDisplay}>
       <div
-        className={`flex md:justify-between justify-evenly gap-2 text-xs font-semibold w-full px-2 py-2 border-b ${border_color}`}
+        className={`${
+          questionAsked.length == 0 ? "hidden" : ""
+        } h-[6%] mt-1 w-full flex items-center px-2 text-xs font-semibold`}
+        onClick={() => {
+          setClearHistoryToggle(!clearHistoryToggle);
+        }}
       >
         <div
-          className={`${
-            questionAsked.length == 0 ? "hidden" : ""
-          } md:w-1/3 min-w-max flex items-center`}
-          onClick={() => {
-            setClearHistoryToggle(!clearHistoryToggle);
-          }}
+          className={`${card_background} p-1 px-2 rounded-lg cursor-pointer max-w-max flex gap-1 items-center`}
         >
-          <div
-            className={`${card_background} p-1 px-2 rounded-lg cursor-pointer max-w-max flex gap-1 items-center`}
-          >
-            <MdDelete  className="text-red-500"/>
-            Clear All
-          </div>
+          <MdDelete className="text-red-500" />
+          Clear All
+        </div>
 
-          {clearHistoryToggle ? (
-            <div className={`absolute top-10 ${card_background} p-8 rounded-lg`}>
-              <div>Confirm delete? This action is irreversible</div>
-              <br/>
-              <div className="flex gap-2 items-center justify-center">
-                <button
+        {clearHistoryToggle ? (
+          <div className={`relative top-20 right-20 ${card_background} p-8 rounded-lg`}>
+            <div>Confirm delete? This action is irreversible</div>
+            <br />
+            <div className="flex gap-2 items-center justify-center">
+              <button
                 className={`text-white bg-red-500 p-1 px-2 rounded-lg cursor-pointer max-w-max`}
-                  onClick={() => {
-                    localStorage.removeItem(subjectId);
-                    setQuestionAsked([]);
-                    setCurrentQuestionAsked([]);
-                    history = [];
-                    setClearHistoryToggle(false);
-                  }}
-                >
-                  Delete
-                </button>
-                <button
+                onClick={() => {
+                  localStorage.removeItem(subjectId);
+                  setQuestionAsked([]);
+                  setCurrentQuestionAsked([]);
+                  history = [];
+                  setClearHistoryToggle(false);
+                }}
+              >
+                Delete
+              </button>
+              <button
                 className={`${card_background} p-1 px-2 rounded-lg cursor-pointer max-w-max`}
-                onClick={() => setClearHistoryToggle(false)}>
-                  Cancel
-                </button>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
-
-        <div className="md:w-1/3 max-w-max">
-          <div
-            className={`${card_background} p-1 px-4 rounded-lg cursor-pointer min-w-max flex items-center justify-between gap-2`}
-          >
-            <span className="max-w-max">Text Size</span>
-            <div className="max-w-full flex items-center">
-              <button className="disabled:cursor-not-allowed px-2 rounded-full font-bold" disabled={sliderValue<15} onClick={() => setSliderValue((prevValue)=>prevValue-1)}>-</button>
-              <input
-                type="range"
-                min="14"
-                max="25"
-                className="slider w-24"
-                value={sliderValue}
-                onChange={(e) => setSliderValue(e.target.value)}
-              />
-              <button className="disabled:cursor-not-allowed px-2 rounded-full font-bold" disabled={sliderValue>24} onClick={() => setSliderValue((prevValue)=>prevValue+1)}>+</button>
+                onClick={() => setClearHistoryToggle(false)}
+              >
+                Cancel
+              </button>
             </div>
           </div>
-        </div>
-        <div className="px-4 w-1/3 p-1 hidden md:flex flex-row justify-end gap-2 text-xs">
-          {!maximiseWindow ? (
-            <div
-              className={`${card_background} p-1 rounded-full cursor-pointer`}
-              onClick={() => setMaximiseWindow(true)}
-            >
-              <MdMaximize />
-            </div>
-          ) : (
-            <div
-              className={`${card_background} p-1 rounded-full cursor-pointer`}
-              onClick={() => setMaximiseWindow(false)}
-            >
-              <MdMinimize />
-            </div>
-          )}
-
-          <div
-            className={`${card_background} p-1 rounded-full cursor-pointer`}
-            onClick={props.askQuestionDisplay}
-          >
-            <MdClose />
-          </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className="w-full h-full flex flex-col items-center gap-2 overflow-y-scroll">
-        <div className="md:h-[82%] h-[86%] overflow-y-scroll scrollbarfeature w-full rounded-lg md:p-4 p-1">
+        <div className="md:h-[82%] h-[86%] overflow-y-scroll scrollbarfeature w-full rounded-lg md:px-4 p-1">
           <div
-            className={`flex flex-col gap-2 py-4 px-2 ${
-              maximiseWindow ? "md:w-[60%] m-auto" : ""
-            }`}
+            className={`flex flex-col gap-2 py-3 px-2`}
           >
             {questionAsked.length == 0 && currentQuestionAsked.length == 0 ? (
               <div className="relative top-24 font-semibold w-[90%] md:w-[70%] m-auto text-sm">
@@ -299,9 +255,7 @@ export default function AskQuestions({ colorPalette, ...props }) {
 
         <div className="w-full h-[10%] md:pt-4 pt-2">
           <form
-            className={`h-[70%] md:h-full m-auto flex justify-center gap-2 bg-transparent border ${border_color} rounded-lg px-2 py-1 ${
-              maximiseWindow ? "md:w-[60%] m-auto" : "w-[90%]"
-            }`}
+            className={`w-[80%] h-[70%] md:h-full m-auto flex justify-center gap-2 bg-transparent border ${border_color} rounded-lg px-2 py-1`}
             onSubmit={(e) => {
               e.preventDefault();
               askQuestionFetchHandler();
@@ -324,6 +278,6 @@ export default function AskQuestions({ colorPalette, ...props }) {
           </form>
         </div>
       </div>
-    </div>
+    </WindowLayout>
   );
 }

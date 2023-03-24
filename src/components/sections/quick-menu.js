@@ -23,7 +23,6 @@ export default function QuickMenu({colorPalette, ...props}) {
 
     const {
     card_background,
-    app_background,
     border_color,
     accent_text_color,
     gray_text,
@@ -31,9 +30,7 @@ export default function QuickMenu({colorPalette, ...props}) {
   } = colorPalette;
 
   return (
-    <div className={`z-0 h-[87.2vh] md:h-[84vh] ${app_background} ${card_background} shadow-md flex flex-col items-center absolute left-[35%] top-[55px] rounded-lg w-[20%] p-4
-    }`}>
-    <div className="flex flex-col gap-6 pb-24 h-full overflow-y-scroll w-full">
+    <div className="flex flex-col gap-6 pb-24">
       <div>
         <p className={`text-xs font-bold ${gray_text} py-2`}>IPU CSE Subjects</p>
         <div className="flex flex-col justify-between text-xs font-semibold rounded-lg py-1 capitalize">
@@ -94,10 +91,10 @@ export default function QuickMenu({colorPalette, ...props}) {
                       >
                         <div className="text-sm sm:text-xs mt-2 font-semibold pl-2">
                           <div
-                            className={`w-full ${sub_text} border ${border_color} border-opacity-20 hover:border-opacity-90 rounded-lg cursor-pointer px-2 py-2 ${
+                            className={`w-full border ${border_color} border-opacity-20 hover:border-opacity-90 rounded-lg cursor-pointer px-2 py-2 ${
                               subjectId == z.slug
-                                ? accent_text_color
-                                : ``
+                                ? accent_text_color+" "+ 'scale-110'
+                                : sub_text+" "+'hover:scale-105'
                             }`}
                           >
                             <span>{z.subjectName}</span>
@@ -113,7 +110,6 @@ export default function QuickMenu({colorPalette, ...props}) {
           })}
         </div>
       </div>
-    </div>
     </div>
   );
 }
