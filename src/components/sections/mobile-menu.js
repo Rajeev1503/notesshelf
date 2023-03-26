@@ -20,18 +20,18 @@ export default function MobileMenu({colorPalette, ...props}) {
 
   return (
     <div className="sm:hidden fixed text-sm bottom-0 w-full mt-2 z-50">
-      <div className={`flex flex-row items-center justify-start gap-4 py-2 px-4 border-t ${main_text} ${border_color} ${app_background}`}>
+      <div className={`flex flex-row items-center justify-start gap-4 py-2 px-4 shadow-lg ${main_text} bg-[#111] bg-opacity-90`}>
 
         <div className="w-full flex flex-row justify-between items-center">
           <div
             onClick={props.toggleMobileQuickMenu}
-            className={`w-[80px] rounded-3xl text-xs font-semibold p-2 px-4 ${main_text} ${card_background} ${app_background} cursor-pointer`}
+            className={`w-[80px] rounded-3xl text-xs font-semibold p-1 px-2 ${main_text} ${card_background} ${app_background} cursor-pointer`}
           >
             <div className="text-center">Subjects</div>
           </div>
 
           { props.enableAskQuestionButton?<div
-              className={`w-[120px] rounded-3xl text-xs font-semibold p-2 px-4 ${main_text} ${card_background} ${app_background} cursor-pointer`}
+              className={`w-[120px] rounded-3xl text-xs font-semibold p-1 px-2 ${main_text} ${card_background} ${app_background} cursor-pointer`}
               onClick={props.askQuestionDisplay}
             >
               <div className="text-center">
@@ -44,7 +44,7 @@ export default function MobileMenu({colorPalette, ...props}) {
             className={` ${
               props.enableRelatedMenu
                 ? "hidden"
-                : "w-[80px] p-2 px-4 rounded-3xl text-xs font-semibold border border-transparent min-w-max"
+                : "w-[80px] p-1 px-2 rounded-3xl text-xs font-semibold border border-transparent min-w-max"
             } `}
           >
             <div></div>
@@ -53,10 +53,16 @@ export default function MobileMenu({colorPalette, ...props}) {
           <div
             className={`${
               props.enableRelatedMenu ? "" : "hidden"
-            } w-[80px] rounded-3xl text-xs font-semibold p-2 px-4 ${main_text} ${card_background} ${app_background} cursor-pointer`}
+            } w-[80px] rounded-3xl text-xs font-semibold p-1 px-2 ${main_text} ${card_background} ${app_background} cursor-pointer`}
             onClick={props.toggleMobileRelatedMenu}
           >
             <div className="text-center">Related</div>
+          </div>
+          <div
+            className={` w-[80px] rounded-3xl text-xs font-semibold p-1 px-2 ${main_text} ${card_background} ${app_background} cursor-pointer`}
+            onClick={props.toggleMobileRelatedMenu}
+          >
+            <div className="text-center">More</div>
           </div>
         </div>
       </div>

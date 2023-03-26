@@ -109,16 +109,9 @@ export default function Cards(props) {
                 <div className="pb-2 flex flex-row justify-start items-center gap-2 text-center text-xs font-semibold rounded-lg px-4 lg:px-8">
                  {props.isLatestPage && (<><div className={`flex-grow max-w-max py-1 px-2 rounded-lg cursor-pointer ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
                    <span>{e.subject.subjectName} </span>
-                  </div>
-                  <div className={`flex-grow max-w-max py-1 px-2 rounded-lg cursor-pointer ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
-                   {e.category.map((category) => {
-                      return (
-                        <span key={e.id}>{category.split("_").join(" ")}</span>
-                      );
-                    })}
                   </div></>)}
                   <div className={`flex-grow max-w-max py-1 px-2 rounded-lg ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
-                   <div>{isSaved?<span className="flex gap-2 items-center cursor-pointer"><FaCheck />saved</span>:<span className="flex gap-2 items-center cursor-pointer" onClick={()=>savePostHandler(e.slug)}><TbPlaylistAdd />save</span>}</div>
+                   <div>{isSaved?<span className="flex gap-1 items-center cursor-pointer"><FaCheck />saved</span>:<span className="flex gap-1 items-center cursor-pointer" onClick={()=>savePostHandler(e.slug)}><TbPlaylistAdd />save</span>}</div>
                   </div>
                   <div
                     className={`flex-grow max-w-max cursor-pointer flex justify-end`}

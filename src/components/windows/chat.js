@@ -28,9 +28,9 @@ export default function Chat({ colorPalette, ...props }) {
       showTextSizeBar={false}
     >
       <div
-        className={`w-full h-full flex flex-row items-center gap-2`}
+        className={`w-full h-full flex flex-row items-center`}
       >
-        <div className="md:w-1/3 md:block hidden h-full md:p-4 p-1 bg-[#111] bg-opacity-70">
+        <div className={`md:w-[30%] md:block hidden h-full md:p-4 p-1 bg-[#111] bg-opacity-70 border-r ${border_color}`}>
           <div className={`text-xs h-full flex flex-col gap-4 px-2`}>
             <div className="h-[5%] flex flex-row gap-1">
               <input
@@ -94,10 +94,17 @@ export default function Chat({ colorPalette, ...props }) {
           </div>
           </div>
         </div>
-        <div className="md:w-2/3 w-full  h-full flex flex-col md:pt-4 pt-2">
-          <div className="h-[8%]">User 1</div>
-          <div className="h-[77%] overflow-y-scroll scrollbarfeature w-full rounded-lg md:p-4 p-1">
-            <div className={`flex flex-col gap-2 py-4 px-2`}>earlier chats</div>
+        <div className="md:w-[70%] w-full h-full flex flex-col">
+          <div className={`h-[8%] bg-[#111] bg-opacity-70 flex items-center gap-2 px-4 border-b ${border_color}`}><span className="text-3xl">
+                  <RxAvatar />
+                </span>  <span>User 1</span></div>
+          <div className="h-[77%] w-full md:p-4 p-1 rounded-lg overflow-y-scroll scrollbarfeature">
+            <div className={`max-w-[60%] flex flex-col py-1 px-4 bg-red-400 float-left clear-right rounded-lg h-min my-2`}><div className="text-xs">user 2 chat side and design user 2 chat side and design user 2 chat side and design</div><div className="text-xxs text-white text-opacity-50 text-right">9:30 pm</div></div>
+            <div className={`max-w-[60%] flex flex-col py-1 px-4 bg-blue-400 float-right clear-left rounded-lg h-min my-2`}><div className="text-xs">user 1 chat side and design user 1 chat side and design user 1 chat side and design</div><div className="text-xxs text-white text-opacity-50 text-right">9:30 pm</div></div>
+            <div className={`max-w-[60%] flex flex-col py-1 px-4 bg-red-400 float-left clear-right rounded-lg h-min my-2`}><div className="text-xs">user 2 chat side and design user 2 chat side and design user 2 chat side and design</div><div className="text-xxs text-white text-opacity-50 text-right">9:30 pm</div></div>
+            <div className={`max-w-[60%] flex flex-col py-1 px-4 bg-blue-400 float-right clear-left rounded-lg h-min my-2`}><div className="text-xs">user 1 chat side and design user 1 chat side and design user 1 chat side and design</div><div className="text-xxs text-white text-opacity-50 text-right">9:30 pm</div></div>
+            <div className={`max-w-[60%] flex flex-col py-1 px-4 bg-red-400 float-left clear-right rounded-lg h-min my-2`}><div className="text-xs">user 2 chat side and design user 2 chat side and design user 2 chat side and design</div><div className="text-xxs text-white text-opacity-50 text-right">9:30 pm</div></div>
+            <div className={`max-w-[60%] flex flex-col py-1 px-4 bg-blue-400 float-right clear-left rounded-lg h-min my-2`}><div className="text-xs">user 1 chat side and design user 1 chat side and design user 1 chat side and design</div><div className="text-xxs text-white text-opacity-50 text-right">9:30 pm</div></div>
           </div>
           <form
             className={`h-[6%] w-[80%] flex m-auto justify-between gap-2 bg-transparent border ${border_color} rounded-lg px-2 py-1`}

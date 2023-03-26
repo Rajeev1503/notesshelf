@@ -108,6 +108,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
         ) : (
           <></>
         )}
+
         <div className="md:block hidden">
           {props.enableAskQuestionButton ? (
             <div
@@ -203,11 +204,11 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
           <p>
             {current_mode === "dark" ? (
               <span>
-                <MdDarkMode />
+               Dark Mode : ON
               </span>
             ) : (
               <span>
-                <MdOutlineDarkMode />
+                Dark Mode : OFF
               </span>
             )}
           </p>

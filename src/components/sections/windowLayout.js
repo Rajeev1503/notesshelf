@@ -21,8 +21,8 @@ export default function WindowLayout({ colorPalette,sliderValue,setSliderValue,t
 
   return (
     <div
-      className={`z-10 h-[87.2vh] md:h-[92vh] md:border ${card_background} ${app_background} overflow-hidden bg-opacity-90 backdrop-blur-3xl shadow-md flex flex-col items-center absolute top-[53px] rounded-lg w-[98%] ${
-        maximiseWindow ? " md:left-2 md:w-[99%]" : " md:left-[20%] left-1 md:w-[70%]"
+      className={`z-10 md:border ${card_background} ${app_background} overflow-hidden bg-opacity-90 backdrop-blur-3xl shadow-md flex flex-col items-center absolute rounded-lg w-[98%] ${
+        maximiseWindow ? "h-[87.2vh] md:h-[99vh] md:left-2 md:w-[99%] top-[5px]" : "h-[87.2vh] md:h-[92vh] md:left-[20%] left-1 md:w-[70%] top-[53px]"
       }`}
     >
       <div
@@ -82,11 +82,11 @@ export default function WindowLayout({ colorPalette,sliderValue,setSliderValue,t
             className={`flex items-center cursor-pointer`}
             onClick={toggleWindowClose}
           >
-            <BiX  size={20}/>
+            <BiX size={20}/>
           </div>
         </div>
       </div>
-      <div className={`h-[94%] ${maximiseWindow?'w-[60%]':'w-full' }`}>{props.children}</div>
+      <div className={`h-[95%] ${maximiseWindow?'w-[100%]':'w-full' }`}>{props.children}</div>
     </div>
   );
 }
