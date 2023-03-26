@@ -95,7 +95,8 @@ export default function Chat({ colorPalette, ...props }) {
           </div>
         </div>
         <div className="md:w-2/3 w-full  h-full flex flex-col md:pt-4 pt-2">
-          <div className="h-[85%] overflow-y-scroll scrollbarfeature w-full rounded-lg md:p-4 p-1">
+          <div className="h-[8%]">User 1</div>
+          <div className="h-[77%] overflow-y-scroll scrollbarfeature w-full rounded-lg md:p-4 p-1">
             <div className={`flex flex-col gap-2 py-4 px-2`}>earlier chats</div>
           </div>
           <form

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { GET_ALL_SEMESTER } from "graphql/queries";
 import { useContext, useState } from "react";
-import { graphcms } from "graphql/graphCmsClient";
+import { graphcms, graphCmsReadOnly } from "graphql/graphCmsClient";
 import Layout from "@/layout/layout";
 import { BackgroundColorContext } from "@/context/backgroundColorContext";
 import logo from "../../public/icons/icon-512x512.png";
@@ -84,7 +84,7 @@ export default function PageNotFound({ semesters }) {
 }
 
 export async function getStaticProps() {
-  const { semesters } = await graphcms.request(GET_ALL_SEMESTER);
+  const { semesters } = await graphCmsReadOnly.request(GET_ALL_SEMESTER);
 
   if (!semesters) {
     return {
