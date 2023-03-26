@@ -25,6 +25,7 @@ export default function Chat({ colorPalette, ...props }) {
     <WindowLayout
       colorPalette={colorPalette}
       toggleWindowClose={props.toggleChatDisplay}
+      showTextSizeBar={false}
     >
       <div
         className={`w-full h-full flex flex-row items-center gap-2`}

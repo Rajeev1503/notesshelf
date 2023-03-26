@@ -3,37 +3,38 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import { FaShare } from "react-icons/fa";
+import { FaShare, FaCheck } from "react-icons/fa";
+import { TbPlaylistAdd } from 'react-icons/tb'
 
 export default function Cards(props) {
 
   
   const backgroundColorContext = useContext(BackgroundColorContext);
 
-  // function excerptShortner(excerpt, title) {
-  //   let excerptArr = excerpt.split(" ");
-  //   if(title.length>4){
-  //     if (excerptArr.length > 20) {
-  //     excerptArr.splice(20, excerptArr.length - 20, "...");
-  //   }
-  //   }
-  //   else if(title.length>8){
-  //     if (excerptArr.length > 10) {
-  //       excerptArr.splice(10, excerptArr.length - 10, "...");
-  //     }
-  //   }
-  //   else {
-  //     if (excerptArr.length > 20) {
-  //       excerptArr.splice(20, excerptArr.length - 20, "...");
-  //     }
-  //   }
-    
-  //   return excerptArr.join(" ");
-  // }
-
-  const [linkCopied, setLinkCopied] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [clipBoardVariable, setClipBoardVariable] = useState(false);
 
+  async function savePostHandler(postSlug) {
+    try {
+      const response = await fetch("/api/user/save-post", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({postSlug}),
+      });
+
+      const responseDataJson = await response.json();
+      if (!response.ok) {
+        throw new Error(
+          "fetch failed message from frontend : " + responseDataJson.message
+        );
+      }
+      setIsSaved(true);
+  } catch (error) {
+      console.log(error)
+  }
+  }
   function clipBoardCopiedHandler(slug) {
     if (clipBoardVariable == slug) {
       return <span>Link Copied!!!</span>;
@@ -96,7 +97,6 @@ export default function Cards(props) {
                     </div>
                     <div className={`${backgroundColorContext.backgroundColorState.gray_text} text-[0.92rem]`}>
                       {e?.excerpt ? (
-                        // <p>{excerptShortner(e.excerpt, e.title)}</p>
                         <p>{e.excerpt}</p>
                       ) : (
                         <p>No preview Available</p>
@@ -107,12 +107,18 @@ export default function Cards(props) {
                 </div>
                 </Link>
                 <div className="pb-2 flex flex-row justify-start items-center gap-2 text-center text-xs font-semibold rounded-lg px-4 lg:px-8">
-                  <div className={`flex-grow max-w-max py-1 px-2 rounded-lg ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
-                    {e.category.map((category) => {
+                 {props.isLatestPage && (<><div className={`flex-grow max-w-max py-1 px-2 rounded-lg cursor-pointer ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
+                   <span>{e.subject.subjectName} </span>
+                  </div>
+                  <div className={`flex-grow max-w-max py-1 px-2 rounded-lg cursor-pointer ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
+                   {e.category.map((category) => {
                       return (
                         <span key={e.id}>{category.split("_").join(" ")}</span>
                       );
                     })}
+                  </div></>)}
+                  <div className={`flex-grow max-w-max py-1 px-2 rounded-lg ${backgroundColorContext.backgroundColorState.main_text} ${backgroundColorContext.backgroundColorState.card_background}`}>
+                   <div>{isSaved?<span className="flex gap-2 items-center cursor-pointer"><FaCheck />saved</span>:<span className="flex gap-2 items-center cursor-pointer" onClick={()=>savePostHandler(e.slug)}><TbPlaylistAdd />save</span>}</div>
                   </div>
                   <div
                     className={`flex-grow max-w-max cursor-pointer flex justify-end`}

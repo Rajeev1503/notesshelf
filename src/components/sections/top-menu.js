@@ -115,6 +115,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
               onClick={() => {
                 toggleAllMenus.toggleChatDisplay(false);
                 toggleAllMenus.askQuestionDisplay(true);
+                toggleAllMenus.savedPostDisplay(false);
               }}
             >
               <button
@@ -134,6 +135,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
             onClick={() => {
               toggleAllMenus.toggleChatDisplay(true);
               toggleAllMenus.askQuestionDisplay(false);
+              toggleAllMenus.savedPostDisplay(false);
             }}
           >
             <button
@@ -148,13 +150,14 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
             className="w-full hidden md:inline"
             onClick={() => {
               toggleAllMenus.toggleChatDisplay(false);
-              toggleAllMenus.askQuestionDisplay(true);
+              toggleAllMenus.askQuestionDisplay(false);
+              toggleAllMenus.savedPostDisplay(true);
             }}
           >
             <button
               className={`w-full min-w-max shadow-md ${card_background} py-1 px-4 rounded-lg cursor-pointer text-xs`}
             >
-              My Bookmarks
+              Saved Posts
             </button>
           </div>
         </div>

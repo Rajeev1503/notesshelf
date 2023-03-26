@@ -16,7 +16,7 @@ export default function LatestPosts(props) {
       <div className="p-2 w-full flex flex-col mb-14">
         <div className={`${backgroundColorContext.backgroundColorState.gray_text} font-bold text-lg py-4 md:pl-8 pl-2`}>Latest Posts</div>
         <div className="lg:px-8 md:p-0 md:w-[90%] m-auto">
-          <Cards posts={props.posts} />
+          <Cards posts={props.posts} isLatestPage={true}/>
         </div>
       </div>
     </div>

@@ -55,7 +55,7 @@ export default function AskQuestions({ colorPalette, ...props }) {
 
     code: (props) => (
       <div
-        className={`${card_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}
+        className={`bg-[#111] bg-opacity-80 backdrop-blur-xl overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}
       >
         {props.children}
       </div>
@@ -123,7 +123,7 @@ export default function AskQuestions({ colorPalette, ...props }) {
   }
 
   return (
-    <WindowLayout colorPalette={colorPalette} sliderValue={sliderValue} setSliderValue={setSliderValue} toggleWindowClose={props.askQuestionDisplay}>
+    <WindowLayout colorPalette={colorPalette} sliderValue={sliderValue} setSliderValue={setSliderValue} showTextSizeBar={true} toggleWindowClose={props.askQuestionDisplay}>
       <div
         className={`${
           questionAsked.length == 0 ? "hidden" : ""

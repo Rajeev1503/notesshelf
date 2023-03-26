@@ -8,6 +8,7 @@ import AskQuestions from "@/components/windows/askQuestions";
 import { BackgroundColorContext } from "@/context/backgroundColorContext";
 import OnGoingExams from "@/components/onGoingExams";
 import Chat from "@/components/windows/chat";
+import SavedPost from "@/components/windows/savedPosts";
 
 export default function Layout({
   title,
@@ -23,6 +24,7 @@ export default function Layout({
   const [toggleMobileRelatedMenu, setToggleMobileRelatedMenu] = useState(true);
   const [askQuestionDisplay, setAskQuestionDisplay] = useState(false);
   const [toggleChatDisplay, setToggleChatDisplay] = useState(false);
+  const [savedPostDisplay, setSavedPostDisplay] = useState(false);
 
   const backgroundColorContext = useContext(BackgroundColorContext);
 
@@ -87,6 +89,7 @@ export default function Layout({
             toggleAllMenus={{
               toggleChatDisplay: (value) => setToggleChatDisplay(toggleChatDisplay?false:value),
               askQuestionDisplay: (value) => setAskQuestionDisplay(askQuestionDisplay?false:value),
+              savedPostDisplay: (value) => setSavedPostDisplay(savedPostDisplay?false:value),
             }}
           />
         </div>
@@ -190,6 +193,17 @@ export default function Layout({
           <Chat
             colorPalette={colorPalette}
             toggleChatDisplay={() => setToggleChatDisplay(false)}
+            toggleAllMenus={() => {
+              setAskQuestionDisplay(false);
+            }}
+          />
+        </div>
+        <div
+          className={`${savedPostDisplay ? "flex items-center" : "hidden"}`}
+        >
+          <SavedPost
+            colorPalette={colorPalette}
+            savedPostDisplay={() => setSavedPostDisplay(false)}
             toggleAllMenus={() => {
               setAskQuestionDisplay(false);
             }}

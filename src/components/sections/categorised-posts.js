@@ -41,7 +41,7 @@ export default function CategorisedPosts(props) {
                     })}
 
                     <div className="lg:px-4 md:p-0 md:w-[90%] m-auto mb-4">
-                      <Cards posts={postArray} />
+                      <Cards posts={postArray} isLatestPage={false}/>
                     </div>
                   </div>
                 );

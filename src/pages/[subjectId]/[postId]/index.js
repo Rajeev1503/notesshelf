@@ -6,7 +6,7 @@ import {
 } from "graphql/queries";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { graphcms } from "graphql/graphCmsClient";
+import { graphCmsReadOnly } from "graphql/graphCmsClient";
 import { BiLike, BiComment, BiShare } from "react-icons/bi";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -55,7 +55,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
     img: (props) => <Image {...props} width={2250} height={1390} />,
   
     code: (props) => (
-      <div className={`${backgroundColorContext.backgroundColorState.card_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>{props.children}</div>
+      <div className={`bg-[#111] bg-opacity-80 backdrop-blur-xl overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>{props.children}</div>
     ),
   };
 
@@ -119,7 +119,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 }
 
 export async function getStaticPaths() {
-  const { posts } = await graphcms.request(GET_ALL_POST);
+  const { posts } = await graphCmsReadOnly.request(GET_ALL_POST);
   const paths = posts.map((post) => ({
     params: { postId: post.slug, subjectId: post.subject.slug },
   }));
@@ -129,9 +129,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { subjectId, postId } = params;
   try {
-    const { post } = await graphcms.request(GET_POST_BY_SLUG, { slug: postId });
-    const { semesters } = await graphcms.request(GET_ALL_SEMESTER);
-    const { posts } = await graphcms.request(GET_POST_BY_SUBJECT_SLUG, {
+    const { post } = await graphCmsReadOnly.request(GET_POST_BY_SLUG, { slug: postId });
+    const { semesters } = await graphCmsReadOnly.request(GET_ALL_SEMESTER);
+    const { posts } = await graphCmsReadOnly.request(GET_POST_BY_SUBJECT_SLUG, {
       slug: subjectId,
     });
 

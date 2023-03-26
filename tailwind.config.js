@@ -19,7 +19,10 @@ module.exports = {
         'gray-text': '#adadad',
         'border-light': '#eff3f4',
         'border-dark': '#374151',
-      }
+      },
+      fontSize: {
+        'xxs': '0.6rem',
+    },
     },
   },
   plugins: [],

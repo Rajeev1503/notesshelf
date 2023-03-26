@@ -5,7 +5,7 @@ import {
   GET_POST_BY_SUBJECT_SLUG,
   GET_SUBJECT_BY_SLUG,
 } from "graphql/queries";
-import { graphcms } from "graphql/graphCmsClient";
+import { graphCmsReadOnly } from "graphql/graphCmsClient";
 import Layout from "@/layout/layout";
 
 export default function Subject({ posts, subject, semesters }) {
@@ -19,13 +19,13 @@ export default function Subject({ posts, subject, semesters }) {
       enableAskQuestionButton={true}
       enableRelatedMenu={false}
     >
-      <CategorisedPosts posts={posts} semesters={semesters} />
+      <CategorisedPosts posts={posts} semesters={semesters}/>
     </Layout>
   );
 }
 
 export async function getStaticPaths() {
-  const { subjects } = await graphcms.request(GET_ALL_SUBJECT);
+  const { subjects } = await graphCmsReadOnly.request(GET_ALL_SUBJECT);
   const subjectPaths = subjects.map((subject) => ({
     params: { subjectId: subject.slug },
   }));
@@ -38,14 +38,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const slug = await params.subjectId;
   try {
-    const { subject } = await graphcms.request(GET_SUBJECT_BY_SLUG, {
+    const { subject } = await graphCmsReadOnly.request(GET_SUBJECT_BY_SLUG, {
       slug: slug,
     });
 
-    const { posts } = await graphcms.request(GET_POST_BY_SUBJECT_SLUG, {
+    const { posts } = await graphCmsReadOnly.request(GET_POST_BY_SUBJECT_SLUG, {
       slug: slug,
     });
-    const { semesters } = await graphcms.request(GET_ALL_SEMESTER);
+    const { semesters } = await graphCmsReadOnly.request(GET_ALL_SEMESTER);
     if (!subject || !posts || !semesters) {
       return {
         notFound: true,
