@@ -81,7 +81,7 @@ export default function Layout({
     if (process.env.NODE_ENV == "production") {
       url = process.env.PRODUCTION_URL==undefined?'https://notesshelfmain.vercel.app':process.env.PRODUCTION_URL;
       if (subjectId) {
-        url = url + subjectId;
+        url = url + "/" + subjectId;
         if (postId) {
           url = url + subjectId + "/" + postId;
         }
@@ -89,7 +89,7 @@ export default function Layout({
     } else {
       url = "http://localhost:3000/";
       if (subjectId) {
-        url = url + subjectId;
+        url = url + "/" + subjectId;
         if (postId) {
           url = url + subjectId + "/" + postId;
         }
