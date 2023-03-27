@@ -10,6 +10,7 @@ import OnGoingExams from "@/components/onGoingExams";
 import Chat from "@/components/windows/chat";
 import SavedPost from "@/components/windows/savedPosts";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Layout({
   title,
@@ -96,6 +97,8 @@ export default function Layout({
     }
     return url;
   }
+
+
 
   return (
     <>
