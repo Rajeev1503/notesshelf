@@ -10,7 +10,7 @@ import OnGoingExams from "@/components/onGoingExams";
 import Chat from "@/components/windows/chat";
 import SavedPost from "@/components/windows/savedPosts";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import logo from '../../public/icons/icon-512x512.png'
 
 export default function Layout({
   title,
@@ -114,7 +114,7 @@ export default function Layout({
           property="og:description"
           content={excerpt?excerpt:title}
         />
-        <meta property="og:image" content={coverImage?coverImage:'/public/icons/icon-512x512.png'} />
+        <meta property="og:image" content={coverImage?coverImage:logo} />
       </Head>
       <div
         className={`${app_background} flex flex-col w-full ${main_text} pb-24 sm:pb-0`}

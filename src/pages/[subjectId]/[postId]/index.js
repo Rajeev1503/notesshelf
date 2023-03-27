@@ -68,8 +68,8 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
       enableShareButton={true}
       enableAskQuestionButton={true}
       enableRelatedMenu={true}
-      excerpt={postContent.excerpt}
-      coverImage={postContent.coverImage.url}
+      excerpt={postContent?.excerpt}
+      coverImage={postContent?.coverImage?.url}
     >
         <div className="mt-2 sm:w-[90%] w-[98%] m-auto h-full p-2 rounded-lg">
 
