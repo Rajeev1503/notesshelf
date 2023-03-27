@@ -77,8 +77,8 @@ export default function Layout({
 
   function generateUrl() {
     let url;
-    if (process.env.NODE_ENV !== "production") {
-      url = process.env.PRODUCTION_URL;
+    if (process.env.NODE_ENV == "production") {
+      url = process.env.PRODUCTION_URL==undefined?'https://notesshelfmain.vercel.app':process.env.PRODUCTION_URL;
       if (subjectId) {
         url = url + subjectId;
         if (postId) {
