@@ -8,7 +8,6 @@ import { TbPlaylistAdd } from 'react-icons/tb'
 
 export default function Cards(props) {
 
-  
   const backgroundColorContext = useContext(BackgroundColorContext);
 
   const [isSaved, setIsSaved] = useState(false);

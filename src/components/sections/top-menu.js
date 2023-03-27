@@ -88,9 +88,8 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
               onClick={() => {
                 navigator.clipboard.writeText(
                   process.env.NODE_ENV == "production"
-                    ? `notesshelf.vercel.app/${subjectId}/${
-                        postId ? postId : ""
-                      }`
+                    ? process.env.PRODUCTION_URL+'/'+subjectId+'/'+ postId ? postId : ""
+                      
                     : `http://localhost:3000/${subjectId}/${
                         postId ? postId : ""
                       }`
