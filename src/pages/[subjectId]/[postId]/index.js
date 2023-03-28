@@ -21,7 +21,7 @@ import { BackgroundColorContext } from "@/context/backgroundColorContext";
 export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 
   const backgroundColorContext = useContext(BackgroundColorContext);
-  const [sliderValue, setSliderValue] = useState(17);
+  const [sliderValue, setSliderValue] = useState(16);
 
   const MDXComponents = {
     wrapper: (props) => (
@@ -36,7 +36,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
     ),
   
     h3: (props) => (
-      <h1 className={`text-xl font-semibold py-6 mt-10 border-t-2 ${backgroundColorContext.backgroundColorState.border_color} border-opacity-50`}>
+      <h1 className={`text-2xl font-semibold py-6 mt-10 border-t-2 ${backgroundColorContext.backgroundColorState.border_color} ${backgroundColorContext.backgroundColorState.sub_text} border-opacity-50`}>
         {props.children}
       </h1>
     ),
@@ -54,7 +54,7 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
     img: (props) => <Image {...props} width={2250} height={1390} />,
   
     code: (props) => (
-      <div className={`bg-[#111] bg-opacity-80 backdrop-blur-xl overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>{props.children}</div>
+      <div className={`${backgroundColorContext.backgroundColorState.gray_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}>{props.children}</div>
     ),
   };
 

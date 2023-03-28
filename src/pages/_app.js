@@ -9,13 +9,13 @@ export default function App({ Component, pageProps }) {
     card_background: "bg-[#0d1117] border border-[#21262d]",
     small_card_background: "bg-[#9caf88] bg-opacity-50",
     border_color: "border-[#21262d]",
-    gray_background: "bg-[#374151]",
+    gray_background: "bg-[#161b22]",
     accent_background: "bg-[#fff]",
     accent_text_color: "text-[#fff]",
     accent_border_color: "border-[#fff]",
-    main_text: "text-[#fafafa]",
-    sub_text: "text-[#cbd5e1]",
-    gray_text: "text-[#888]",
+    main_text: "text-[#c9d1d9]",
+    sub_text: "text-[#c9d1d9]",
+    gray_text: "text-[#9da7b3]",
   };
 
   const LIGHT_MODE = {
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
     app_background: "bg-[#fff]",
     card_background: "bg-[#fff] border border-[#eee]",
     border_color: "border-[#DBDBDB]",
-    gray_background: "bg-[#374151]",
+    gray_background: "bg-[#161b22]",
     accent_background: "bg-[#000]",
     accent_text_color: "text-[#000]",
     accent_border_color: "border-[#000]",

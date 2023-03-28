@@ -21,12 +21,12 @@ export default function WindowLayout({ colorPalette,sliderValue,setSliderValue,t
 
   return (
     <div
-      className={`z-10 md:border ${card_background} ${app_background} overflow-hidden bg-opacity-90 backdrop-blur-3xl shadow-md flex flex-col items-center absolute rounded-lg w-[98%] ${
+      className={`z-10 md:border ${card_background} ${app_background} overflow-hidden flex flex-col items-center absolute rounded-lg w-[98%] ${
         maximiseWindow ? "h-[87.2vh] md:h-[99vh] md:left-2 md:w-[99%] top-[5px]" : "h-[87.2vh] md:h-[92vh] md:left-[20%] left-1 md:w-[70%] top-[53px]"
       }`}
     >
       <div
-        className={`h-[5%] bg-[#111] bg-opacity-80 backdrop-blur-xl flex md:justify-between justify-between items-center gap-2 text-xs font-semibold w-full px-2 py-2 border-b ${border_color}`}
+        className={`h-[5%] ${gray_background} flex md:justify-between justify-between items-center gap-2 text-xs font-semibold w-full px-2 py-2 border-b ${border_color}`}
       >
         <div className="md:w-1/3 max-w-max">
         <div

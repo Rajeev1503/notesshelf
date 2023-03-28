@@ -94,7 +94,7 @@ export default function QuickMenu({colorPalette, ...props}) {
                             className={`w-full border ${border_color} border-opacity-20 hover:border-opacity-90 rounded-lg cursor-pointer px-2 py-2 ${
                               subjectId == z.slug
                                 ? accent_text_color+" "+ 'scale-110'
-                                : sub_text+" "+'hover:scale-105'
+                                : gray_text+" "+'hover:scale-105'
                             }`}
                           >
                             <span>{z.subjectName}</span>

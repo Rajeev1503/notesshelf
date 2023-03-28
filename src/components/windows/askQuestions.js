@@ -55,7 +55,7 @@ export default function AskQuestions({ colorPalette, ...props }) {
 
     code: (props) => (
       <div
-        className={`bg-[#111] bg-opacity-80 backdrop-blur-xl overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}
+        className={`${gray_background} overflow-x-scroll hideScrollBar p-4 rounded-lg my-4`}
       >
         {props.children}
       </div>
