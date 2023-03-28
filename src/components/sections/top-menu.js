@@ -2,18 +2,22 @@ import { BackgroundColorContext } from "@/context/backgroundColorContext";
 import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaShareAlt } from "react-icons/fa";
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
 import logo from "../../../public/icons/icon-512x512.png";
 
-export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
+export default function TopMenu({ colorPalette, toggleAllMenus,generateUrl, ...props }) {
   const [clipBoardVariable, setClipBoardVariable] = useState(false);
   const { subjectId, postId } = useRouter().query;
 
+  useEffect(() => {
+    setClipBoardVariable(false)
+  }, [subjectId])
+  
   function clipBoardCopiedHandler() {
     if (clipBoardVariable) {
-      return <span>Link Copied!!!</span>;
+      return <span>Link Copied</span>;
     }
     return (
       <div className="flex items-center justify-center gap-1">
@@ -86,14 +90,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
             <div
               className="flex-grow max-w-min"
               onClick={() => {
-                navigator.clipboard.writeText(
-                  process.env.NODE_ENV == "production"
-                    ? process.env.VERCEL_URL+'/'+subjectId+'/'+ postId && (postId)
-                      
-                    : `http://localhost:3000/${subjectId}/${
-                        postId ? postId : ""
-                      }`
-                );
+                navigator.clipboard.writeText(generateUrl);
                 setClipBoardVariable(true);
               }}
             >
