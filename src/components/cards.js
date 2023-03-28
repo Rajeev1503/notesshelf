@@ -117,8 +117,8 @@ export default function Cards(props) {
                     onClick={() => {
                       navigator.clipboard.writeText(
                         process.env.NODE_ENV == "production"
-                          ? `${process.env.PRODUCTION_URL==undefined?'https://notesshelfmain.vercel.app':process.env.PRODUCTION_URL}/${e.subject.slug}/${e.slug}`
-                          : `http://localhost:3000/${e.subject.slug}/${e.slug}`
+                          ? process.env.VERCEL_URL+'/'+e.subject.slug+'/'+e.slug
+                          : 'http://localhost:3000/'+e.subject.slug+'/'+e.slug
                       );
                       setClipBoardVariable(e.slug);
                     }}

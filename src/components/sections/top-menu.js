@@ -88,7 +88,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
               onClick={() => {
                 navigator.clipboard.writeText(
                   process.env.NODE_ENV == "production"
-                    ? process.env.PRODUCTION_URL==undefined?'https://notesshelfmain.vercel.app':process.env.PRODUCTION_URL+'/'+subjectId+'/'+ postId ? postId : ""
+                    ? process.env.VERCEL_URL+'/'+subjectId+'/'+ postId && (postId)
                       
                     : `http://localhost:3000/${subjectId}/${
                         postId ? postId : ""
@@ -129,7 +129,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
           )}
         </div>
 
-        <div className="md:block hidden">
+        <div className="hidden">
           <div
             className="w-full hidden md:inline"
             onClick={() => {
@@ -145,7 +145,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
             </button>
           </div>
         </div>
-        <div className="md:block hidden">
+        <div className="hidden">
           <div
             className="w-full hidden md:inline"
             onClick={() => {
@@ -161,7 +161,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
             </button>
           </div>
         </div>
-        <div className="md:block hidden">
+        <div className="hidden">
           <div
             className="w-full hidden md:inline"
             onClick={() => {
@@ -178,7 +178,7 @@ export default function TopMenu({ colorPalette, toggleAllMenus, ...props }) {
         </div>
         <div>
           <div
-            className="w-full hidden md:inline"
+            className="w-full hidden"
             onClick={() => {
               toggleAllMenus.toggleChatDisplay(false);
               toggleAllMenus.askQuestionDisplay(true);
