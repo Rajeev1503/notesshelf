@@ -82,3 +82,28 @@
   background-color: transparent;
 }
 }
+
+.toc{
+  padding-top:2rem;
+  padding-bottom:4rem;
+  background-color: #161b22;
+  margin-bottom:4rem;
+  border-radius:10px;
+}
+.toc-link-h1{
+  font-size: 25px;
+  font-weight:600;
+}
+
+.toc-level-1 li{
+  list-style: none;
+}
+.toc-level-2 li{
+  color:#ddd;
+  list-style: disc;
+  font-weight:400;
+}
+
+li::marker{
+    color:#444
+}

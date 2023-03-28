@@ -5,16 +5,16 @@ import { useReducer } from "react";
 export default function App({ Component, pageProps }) {
   const DARK_MODE = {
     mode: "dark",
-    app_background: "bg-[#000]",
-    card_background: "bg-[#000] border border-[#202020]",
+    app_background: "bg-[#0d1117]",
+    card_background: "bg-[#0d1117] border border-[#21262d]",
     small_card_background: "bg-[#9caf88] bg-opacity-50",
-    border_color: "border-[#202020]",
+    border_color: "border-[#21262d]",
     gray_background: "bg-[#374151]",
     accent_background: "bg-[#fff]",
     accent_text_color: "text-[#fff]",
     accent_border_color: "border-[#fff]",
-    main_text: "text-[#fff]",
-    sub_text: "text-[#999]",
+    main_text: "text-[#fafafa]",
+    sub_text: "text-[#cbd5e1]",
     gray_text: "text-[#888]",
   };
 

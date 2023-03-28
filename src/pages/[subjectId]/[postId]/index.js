@@ -11,9 +11,8 @@ import { BiLike, BiComment, BiShare } from "react-icons/bi";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
+import toc from "rehype-toc";
 import Layout from "@/layout/layout";
-
-
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { BackgroundColorContext } from "@/context/backgroundColorContext";
@@ -26,12 +25,12 @@ export default function Post({ postContent, mdxContent, semesters, allPosts }) {
 
   const MDXComponents = {
     wrapper: (props) => (
-      <div className="" style={{fontSize:sliderValue+'px', lineHeight:sliderValue/9}}>
+      <div className={`font-sans break-words ${backgroundColorContext.backgroundColorState.main_text}`} style={{fontSize:sliderValue+'px', lineHeight:sliderValue/8, letterSpacing:'0.1px'}}>
         <main>{props.children}</main>
       </div>
     ),
     p: (props) => (
-      <p className={`${backgroundColorContext.backgroundColorState.sub_text}`}>
+      <p className={`${backgroundColorContext.backgroundColorState.sub_text} font-normal`}>
         {props.children}
       </p>
     ),
@@ -146,9 +145,8 @@ export async function getStaticProps({ params }) {
       const mdxSource = await serialize(postContent, {
         mdxOptions: {
           rehypePlugins: [
-            rehypeSlug,
-            [rehypeAutolinkHeadings, { behavior: "wrap" }],
             rehypeHighlight,
+            toc,
           ],
         },
       });
